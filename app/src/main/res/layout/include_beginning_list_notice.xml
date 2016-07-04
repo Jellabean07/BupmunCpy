@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:background="@drawable/list_view_background"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:id="@+id/view_list_notice_title">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text ="공지사항"
+                android:gravity="left|center"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:id="@+id/view_list_notice_textview_title"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text ="+ MORE"
+                android:textColor="#dcdcdc"
+                android:gravity="center|right"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:id="@+id/view_list_notice_textview_more"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#dcdcdc"
+        android:layout_marginLeft="10dp"
+        android:layout_height="1dp">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:id="@+id/view_list_notice_content">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_list_notice_listview"
+            android:divider="#ffffff"
+            android:dividerHeight="-15dp"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    android:gravity="center"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#917dd8"
+            android:padding="6dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:gravity="left"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="나의 감각감상"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:gravity="right"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:id="@+id/dialog_writing_feeling_regist_date_textview"
+                    android:text="2016-01-21"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dialog_writing_feeling_regist_title_textview"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:singleLine="true"
+
+                android:text="개교의 동기"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="265dp"
+            android:minHeight="265dp"
+            android:background="@drawable/view_standard_box"
+            android:padding="16dp">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/view_board_write_edittext"
+                    android:id="@+id/dialog_writing_feeling_regist_content_edittext"
+                    android:textSize="15sp"
+                    android:textColor="#313131"
+                    android:textColorHint="#a0a0a0"
+                    android:hint="내 용"
+                    android:gravity="top"/>
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:id="@+id/dialog_writing_feeling_regist_regist_btn"
+                android:text="작성"
+                android:background="@drawable/view_board_search_box"/>
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:id="@+id/dialog_writing_feeling_regist_cancel_btn"
+                android:text="취소"
+                android:background="@drawable/view_board_search_box"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top|center">
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="20">
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/home_progress_dot"
+                android:id="@+id/list_item_imageview" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:text="test"
+                android:id="@+id/list_item_textview"
+                android:gravity="left|center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

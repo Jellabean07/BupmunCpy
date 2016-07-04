@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            android:text="홍길동님의 전체 랭킹은 전체 1183명 중에 1183위 입니다."
+            android:id="@+id/rank_today_title_msg"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"></LinearLayout>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/rank_today_recyclerview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+
+</LinearLayout>

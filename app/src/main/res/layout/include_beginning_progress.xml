@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="vertical"
+
+        android:id="@+id/view_progress_top">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view_progress_imageview_title"
+            android:src="@drawable/home_progress_title"  />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="vertical"
+        android:id="@+id/view_progress_middle">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="50%"
+            android:textSize="32dp"
+            android:gravity="center"
+            android:textColor="#917dd8"
+            android:id="@+id/view_progress_textview_value"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="vertical"
+        android:id="@+id/view_progress_bottom"
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/view_progress_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/view_progress"
+            android:layout_width="340dp"
+            android:layout_height="10dp" />
+        <ImageView
+            android:layout_width="340dp"
+            android:layout_height="10dp"
+            android:src="@drawable/progress_dot"
+            android:id="@+id/view_progress_imageview_dot"  />
+
+    </LinearLayout>
+
+</LinearLayout>

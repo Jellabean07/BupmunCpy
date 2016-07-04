@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/board_detail_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.wonbuddism.bupmun.Board.BoardMainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/login_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#917dd8"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Toolbar"
+            app:layout_collapseMode="pin">
+            <TextView
+                android:id="@+id/login_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="로그인"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+        </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="16dp"
+                android:hint="아이디를 입력하세요"
+                android:singleLine="true"
+                android:textSize="17sp"
+                android:textColorHint="#a0a0a0"
+                android:textColor="#313131"
+                android:background="@drawable/view_login_edittext"
+                android:id="@+id/login_main_id_edittext"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="16dp"
+                android:hint="비밀번호를 입력하세요"
+                android:password="true"
+                android:singleLine="true"
+                android:textSize="17sp"
+                android:textColorHint="#a0a0a0"
+                android:textColor="#313131"
+                android:background="@drawable/view_login_edittext"
+                android:id="@+id/login_main_pass_edittext"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#c9c9c9"></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/login_main_submit_btn"
+                android:textSize="17sp"
+                android:textColor="#ffffff"
+                android:background="@drawable/view_login_button"
+                android:text="로그인"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
+

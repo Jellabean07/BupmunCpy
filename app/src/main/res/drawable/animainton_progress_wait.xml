@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:drawable="@drawable/progressbar_00000"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00001"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00002"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00003"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00004"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00005"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00006"
+        android:duration="50"/>
+
+    <item
+        android:drawable="@drawable/progressbar_00007"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00008"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00009"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00010"
+        android:duration="50"/>
+
+    <item
+        android:drawable="@drawable/progressbar_00011"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00012"
+        android:duration="50"/>
+
+    <item
+        android:drawable="@drawable/progressbar_00013"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00014"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/progressbar_00015"
+        android:duration="50"/>
+
+</animation-list>
