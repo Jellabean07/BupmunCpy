@@ -4,16 +4,13 @@ package com.wonbuddism.bupmun.Village;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageMainInfo;
+import com.wonbuddism.bupmun.DataVo.VillageMainInfo;
 
 import java.util.ArrayList;
 

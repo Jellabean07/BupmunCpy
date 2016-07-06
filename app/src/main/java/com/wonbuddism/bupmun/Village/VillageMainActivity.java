@@ -14,10 +14,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
@@ -29,30 +27,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Rank.RankTodayPage.HTTPconnRankToday;
-import com.wonbuddism.bupmun.Utility.CustomLinearLayoutManager;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.EndlessRecyclerOnScrollListener;
 import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
-import com.wonbuddism.bupmun.Utility.PrefUserInfo;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillComment;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillCommentDelete;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillCommentRegist;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillMember;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillStats;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageComments;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageDeleteListener;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageMainInfo;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageMember;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnVillComment;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnVillCommentDelete;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnVillCommentRegist;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnVillStats;
+import com.wonbuddism.bupmun.DataVo.VillageComments;
+import com.wonbuddism.bupmun.DataVo.VillageMainInfo;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 
 public class VillageMainActivity extends AppCompatActivity implements View.OnClickListener, AppBarLayout.OnOffsetChangedListener, VillageDeleteListener{
 

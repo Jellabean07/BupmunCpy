@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
+import com.wonbuddism.bupmun.Database.DbAdapter;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.CustomLinearLayoutManager;
 import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
@@ -35,12 +35,7 @@ public class ProgressMainActivity extends AppCompatActivity {
     private List<Fragment> listData;
     private ImageView pageDot;
     private DrawerLayout mDrawerLayout;
-    private TextView info_content1;
-    private TextView info_content2;
-    private TextView info_content3;
-    private ProgressTitleTopRankAdapter adapter;
 
-    private List<Card> cards;
     private ArrayList<String> contents;
     private RecyclerView rv;
     private DbAdapter dbAdapter;
@@ -70,22 +65,6 @@ public class ProgressMainActivity extends AppCompatActivity {
         rv.setLayoutManager(layoutManager);
         rv.setNestedScrollingEnabled(false);
         setContentData("정전");
-        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int lastVisibleItemPos = layoutManager.findLastVisibleItemPosition();
-                Log.i("getChildCount", String.valueOf(visibleItemCount));
-                Log.i("getItemCount", String.valueOf(totalItemCount));
-                Log.i("lastVisibleItemPos", String.valueOf(lastVisibleItemPos));
-                if ((visibleItemCount + lastVisibleItemPos) >= totalItemCount) {
-                    Log.i("LOG", "Last Item Reached!");
-                }
-            }
-        });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.progress_drawer_layout);
         pageDot = (ImageView)findViewById(R.id.progress_viewpage_page1);
@@ -242,50 +221,6 @@ public class ProgressMainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-   /* private void setContentData(String key){
-        cards = new ArrayList<>();
-        if(key.equals("정전")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title1)));
-            cards.add(new Card("결집과정",getResources().getString(R.string.info_content2_title1)));
-          //  cards.add(new Card("구성내용",getResources().getString(R.string.info_content3_title1)));
-          //  cards.add(new Card("의의",getResources().getString(R.string.info_content4_title1)));
-        }else if(key.equals("대종경")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title2)));
-        //    cards.add(new Card("내용과 특징",getResources().getString(R.string.info_content2_title2)));
-            cards.add(new Card("대종경의 형성과정",getResources().getString(R.string.info_content3_title2)));
-       //     cards.add(new Card("대종경 자료의 출처",getResources().getString(R.string.info_content4_title2)));
-       //     cards.add(new Card("대종경의 의의",getResources().getString(R.string.info_content5_title2)));
-        }else if(key.equals("불조요경")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title3)));
-            cards.add(new Card("불조요경 결집과정",getResources().getString(R.string.info_content2_title3)));
-        //    cards.add(new Card("원불교 교리와의 상관성",getResources().getString(R.string.info_content3_title3)));
-         //   cards.add(new Card("볼조요경의 의의",getResources().getString(R.string.info_content4_title3)));
-
-        }else if(key.equals("예전")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title4)));
-        //    cards.add(new Card("편찬의 사상적 배경",getResources().getString(R.string.info_content2_title4)));
-            cards.add(new Card("예전의 편수 과정",getResources().getString(R.string.info_content3_title4)));
-        //    cards.add(new Card("예전의 사회적 성격",getResources().getString(R.string.info_content4_title4)));
-
-        }else if(key.equals("정산종사법어")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title5)));
-            cards.add(new Card("편찬과정",getResources().getString(R.string.info_content2_title5)));
-   //         cards.add(new Card("세전의 구성",getResources().getString(R.string.info_content3_title5)));
-   //         cards.add(new Card("법어의 구성",getResources().getString(R.string.info_content4_title5)));
-        }else if(key.equals("대산종사법어")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title6)));
-            cards.add(new Card("내용",getResources().getString(R.string.info_content2_title6)));
-            cards.add(new Card("추가내용",getResources().getString(R.string.info_content3_title6)));
-        }else if(key.equals("원불교교사")){
-            cards.add(new Card("개요",getResources().getString(R.string.info_content1_title7)));
-            cards.add(new Card("편찬과정",getResources().getString(R.string.info_content2_title7)));
-    //        cards.add(new Card("내용구성",getResources().getString(R.string.info_content3_title7)));
-   //         cards.add(new Card("편찬의의",getResources().getString(R.string.info_content4_title7)));
-        }
-
-        initializeAdapter();
-    }*/
-
 
     private void setContentData(String key){
         dbAdapter=new DbAdapter(ProgressMainActivity.this);
@@ -298,8 +233,6 @@ public class ProgressMainActivity extends AppCompatActivity {
     }
 
     private void initializeAdapter(String title){
-       /* ProgressRecyclerViewAdapter adapter = new ProgressRecyclerViewAdapter(cards);
-        rv.setAdapter(adapter);*/
         ProgressContentRecyclerViewAdapter recyclerViewAdapter = new ProgressContentRecyclerViewAdapter(ProgressMainActivity.this, title, contents);
         rv.setAdapter(recyclerViewAdapter);
 

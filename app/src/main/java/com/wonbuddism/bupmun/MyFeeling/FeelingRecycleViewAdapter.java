@@ -2,7 +2,6 @@ package com.wonbuddism.bupmun.MyFeeling;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.FeelingMemo;
+import com.wonbuddism.bupmun.DataVo.FeelingMemo;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
 

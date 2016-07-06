@@ -9,20 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wonbuddism.bupmun.MyFeeling.FeelingItem;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.FeelingMemo;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingSplit;
+import com.wonbuddism.bupmun.DataVo.FeelingMemo;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingSplit;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class WritingFeelingDialog extends Dialog implements View.OnClickListener, AbsListView.OnScrollListener{
 

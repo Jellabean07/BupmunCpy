@@ -8,10 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.wonbuddism.bupmun.Database.BupmunItem;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TypingTempLogDbAdapter {

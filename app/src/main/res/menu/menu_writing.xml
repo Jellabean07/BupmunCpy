@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_writing_main_error"
+        android:title="오류신고"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_writing_main_feeling"
+        android:title="감각감상"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_writing_main_load"
+        android:title="불러오기"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_writing_main_save"
+        android:title="저장"
+        app:showAsAction="always"/>
+    <!-- app:actionViewClass="android.support.v7.widget.SearchView" -->
+</menu>

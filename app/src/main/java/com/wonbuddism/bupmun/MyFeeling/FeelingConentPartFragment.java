@@ -10,15 +10,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.FeelingMemo;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingAll;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingPart;
+import com.wonbuddism.bupmun.DataVo.FeelingMemo;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingPart;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
 

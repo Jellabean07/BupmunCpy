@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.wonbuddism.bupmun.Database.Typing.BUPMUN_TYPING_INDEX;
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
-
 import java.io.InputStream;
 
 import jxl.Sheet;

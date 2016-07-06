@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Database.Typing.TYPING_HIST;
+import com.wonbuddism.bupmun.Database.TYPING_HIST;
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
 
 import org.json.JSONArray;

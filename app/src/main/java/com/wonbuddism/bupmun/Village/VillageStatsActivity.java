@@ -14,10 +14,9 @@ import android.widget.TextView;
 import com.wonbuddism.bupmun.Utility.CustomLinearLayoutManager;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillStats;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillStatsMember;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageStats;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageStatsMember;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnVillStatsMember;
+import com.wonbuddism.bupmun.DataVo.VillageStats;
+import com.wonbuddism.bupmun.DataVo.VillageStatsMember;
 
 import java.util.ArrayList;
 import java.util.List;

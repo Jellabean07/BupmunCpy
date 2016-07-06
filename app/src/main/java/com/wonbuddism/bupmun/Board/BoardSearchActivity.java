@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +17,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Board.HTTPconnection.BoardArticle;
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardSearch;
+import com.wonbuddism.bupmun.DataVo.BoardArticle;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardSearch;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
-import com.wonbuddism.bupmun.Utility.LoadingProgressManager;
 import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
 
 import org.angmarch.views.NiceSpinner;

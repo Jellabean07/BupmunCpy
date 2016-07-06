@@ -3,7 +3,6 @@ package com.wonbuddism.bupmun.Village;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,9 +12,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillCommentDelete;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageComments;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageDeleteListener;
+import com.wonbuddism.bupmun.DataVo.VillageComments;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

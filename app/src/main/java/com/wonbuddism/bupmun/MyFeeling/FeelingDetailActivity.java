@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.FeelingMemo;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingDelete;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingModify;
+import com.wonbuddism.bupmun.DataVo.FeelingMemo;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingDelete;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingModify;
 import com.wonbuddism.bupmun.R;
 
 public class FeelingDetailActivity extends AppCompatActivity implements View.OnClickListener{

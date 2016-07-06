@@ -1,28 +1,15 @@
 package com.wonbuddism.bupmun.Login;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.wonbuddism.bupmun.Main.BeginningActivity;
-import com.wonbuddism.bupmun.Main.MainActivity;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnectionLogin;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.PrefUserInfo;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
-import com.wonbuddism.bupmun.Writing.HTTPconnection.HTTPconnSyncDown;
 
 public class LoginMainActivity extends AppCompatActivity implements View.OnClickListener{
 

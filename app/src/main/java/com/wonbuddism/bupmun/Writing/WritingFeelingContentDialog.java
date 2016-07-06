@@ -3,7 +3,6 @@ package com.wonbuddism.bupmun.Writing;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,16 +10,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.wonbuddism.bupmun.MyFeeling.FeelingItem;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.FeelingMemo;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingDelete;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingModify;
+import com.wonbuddism.bupmun.DataVo.FeelingMemo;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingDelete;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingModify;
 import com.wonbuddism.bupmun.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class WritingFeelingContentDialog extends Dialog implements View.OnClickListener{

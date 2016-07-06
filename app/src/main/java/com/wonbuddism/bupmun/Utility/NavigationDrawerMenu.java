@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -19,16 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Board.BoardMainActivity;
-import com.wonbuddism.bupmun.Login.HTTPconnectionLogout;
 import com.wonbuddism.bupmun.Login.LoginMainActivity;
-import com.wonbuddism.bupmun.Main.BeginningActivity;
 import com.wonbuddism.bupmun.Main.MainActivity;
 import com.wonbuddism.bupmun.MyFeeling.FeelingMainActivity;
 import com.wonbuddism.bupmun.Progress.ProgressMainActivity;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Rank.RankMainActivity;
-import com.wonbuddism.bupmun.Village.HTTPconnection.HTTPconnVillMainInfo;
-import com.wonbuddism.bupmun.Village.VillageMainActivity;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnVillMainInfo;
 import com.wonbuddism.bupmun.Writing.WritingMainActivity;
 
 import java.util.List;

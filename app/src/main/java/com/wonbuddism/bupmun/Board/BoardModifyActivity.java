@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Board.HTTPconnection.BoardDetail;
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardModify;
+import com.wonbuddism.bupmun.DataVo.BoardDetail;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardModify;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
 

@@ -9,12 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wonbuddism.bupmun.MyFeeling.FeelingItem;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageMember;
-import com.wonbuddism.bupmun.Writing.WritingFeelingContentDialog;
-import com.wonbuddism.bupmun.Writing.WritingFeelingDialog;
+import com.wonbuddism.bupmun.DataVo.VillageMember;
 
 import java.util.ArrayList;
 

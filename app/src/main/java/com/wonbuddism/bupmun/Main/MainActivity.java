@@ -15,8 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
-import com.wonbuddism.bupmun.Login.HTTPconnectionLogout;
+import com.wonbuddism.bupmun.Database.DbAdapter;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnectionLogout;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingValue;
 import com.wonbuddism.bupmun.Login.LoginMainActivity;
 import com.wonbuddism.bupmun.Progress.ProgressMainActivity;
 import com.wonbuddism.bupmun.R;
@@ -175,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.include_main_sync_textview:
+                new HttpConnWritingValue(this).execute();
                 break;
             case R.id.include_main_progress_btn:
                 startActivity(new Intent(MainActivity.this, ProgressMainActivity.class));

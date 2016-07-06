@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.wonbuddism.bupmun.Database.Typing.BUPMUN_TYPING_INDEX;
+import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Writing.WritingMainActivity;
 

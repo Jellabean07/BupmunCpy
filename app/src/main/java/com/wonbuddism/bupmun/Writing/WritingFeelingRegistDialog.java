@@ -11,10 +11,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.FeelingMemo;
-import com.wonbuddism.bupmun.MyFeeling.HTTPconnection.HTTPconnFeelingRegist;
+import com.wonbuddism.bupmun.DataVo.FeelingMemo;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingRegist;
 import com.wonbuddism.bupmun.R;
 
 import java.text.SimpleDateFormat;

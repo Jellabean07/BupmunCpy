@@ -5,16 +5,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Board.HTTPconnection.BoardComment;
+import com.wonbuddism.bupmun.DataVo.BoardComment;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;

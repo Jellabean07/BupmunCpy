@@ -21,14 +21,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Database.Typing.BUPMUN_TYPING_INDEX;
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
-import com.wonbuddism.bupmun.Database.Typing.TYPING_HIST;
+import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
+import com.wonbuddism.bupmun.Database.DbAdapter;
+import com.wonbuddism.bupmun.Database.TYPING_HIST;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.AlertDialogYN;
 import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Writing.HTTPconnection.LogRegistManager;
 import com.wonbuddism.bupmun.Writing.TypingProcess.TextSplitManager;
 import com.wonbuddism.bupmun.Writing.TypingProcess.TypingDbManager;
 import com.wonbuddism.bupmun.Writing.TypingProcess.TypingFinishListener;

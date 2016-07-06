@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageMainInfo;
+import com.wonbuddism.bupmun.DataVo.VillageMainInfo;
 
 import java.util.ArrayList;
 import java.util.List;

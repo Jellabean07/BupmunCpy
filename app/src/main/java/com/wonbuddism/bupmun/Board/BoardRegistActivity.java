@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardRegist;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardRegist;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
 

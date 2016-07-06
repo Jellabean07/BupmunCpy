@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.wonbuddism.bupmun.Database.Typing.BUPMUN_TYPING_INDEX;
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
-import com.wonbuddism.bupmun.Database.Typing.TYPING_HIST;
-import com.wonbuddism.bupmun.Database.Typing.TYPING_HIST_LOCAL;
+import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
+import com.wonbuddism.bupmun.Database.DbAdapter;
+import com.wonbuddism.bupmun.Database.TYPING_HIST;
 
 import java.util.ArrayList;
 

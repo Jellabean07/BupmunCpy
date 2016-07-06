@@ -1,24 +1,16 @@
 package com.wonbuddism.bupmun.Village;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageComments;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageStats;
-import com.wonbuddism.bupmun.Village.HTTPconnection.VillageStatsMember;
+import com.wonbuddism.bupmun.DataVo.VillageStatsMember;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

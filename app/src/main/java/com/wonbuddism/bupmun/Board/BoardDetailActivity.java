@@ -25,12 +25,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Board.HTTPconnection.BoardComment;
-import com.wonbuddism.bupmun.Board.HTTPconnection.BoardDetail;
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardCommDelete;
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardCommList;
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardCommRegist;
-import com.wonbuddism.bupmun.Board.HTTPconnection.HTTPconnBoardDelete;
+import com.wonbuddism.bupmun.DataVo.BoardComment;
+import com.wonbuddism.bupmun.DataVo.BoardDetail;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardCommDelete;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardCommList;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardCommRegist;
+import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardDelete;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.CustomLinearLayoutManager;
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;

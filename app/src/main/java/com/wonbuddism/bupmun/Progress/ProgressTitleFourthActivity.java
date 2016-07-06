@@ -10,8 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wonbuddism.bupmun.Database.Typing.BUPMUN_TYPING_INDEX;
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
+import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
+import com.wonbuddism.bupmun.Database.DbAdapter;
 import com.wonbuddism.bupmun.R;
 
 import java.util.ArrayList;

@@ -2,9 +2,7 @@ package com.wonbuddism.bupmun.Progress;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,31 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Database.Typing.BUPMUN_TYPING_INDEX;
-import com.wonbuddism.bupmun.Database.Typing.DbAdapter;
+import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
+import com.wonbuddism.bupmun.Database.DbAdapter;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class ProgressContentRecyclerViewAdapter extends RecyclerView.Adapter<ProgressContentRecyclerViewAdapter.ProgressViewHolder> {
-    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
-        TextView cotnent;
-        LinearLayout lL;
 
-
-        ProgressViewHolder(View itemView) {
-            super(itemView);
-            cotnent = (TextView)itemView.findViewById(R.id.item_progress_main_content_textview);
-            lL = (LinearLayout)itemView.findViewById(R.id.item_progress_main_content_linearlayout);
-        }
-    }
 
     ArrayList<String> cotnents;
     Activity activity;
@@ -57,26 +39,28 @@ public class ProgressContentRecyclerViewAdapter extends RecyclerView.Adapter<Pro
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    @Override
-    public ProgressViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_progress_main_recyclerview, viewGroup, false);
-        ProgressViewHolder pvh = new ProgressViewHolder(v);
-        return pvh;
-    }
 
     @Override
-    public void onBindViewHolder(final ProgressViewHolder personViewHolder, int i) {
-        title2 = cotnents.get(i);
-        personViewHolder.cotnent.setText(cotnents.get(i));
-        personViewHolder.lL.setOnClickListener(new View.OnClickListener() {
+    public ProgressViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_progress_main_recyclerview, viewGroup, false);
+        return new ProgressViewHolder(itemView);
+    }
+
+
+    @Override
+    public void onBindViewHolder(ProgressViewHolder holder, int position) {
+        title2 = cotnents.get(position);
+        Log.e("title1 : title2 : pos" , title1+" : "+title2+" : "+position);
+        holder.cotnent.setText(cotnents.get(position));
+        holder.lL.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Log.e("click", "아이템클릭");
                 Intent intent;
                 dbAdapter.open();
-                ArrayList<String> list = dbAdapter.getAllTitle3(title1, personViewHolder.cotnent.getText().toString());
-                Log.e("title1 : title2", title1+" : "+title2);
+                ArrayList<String> list = dbAdapter.getAllTitle3(title1, title2);
+                Log.e("title2: ",title2);
                 Log.e("title3",list.toString());
                 if (list.size() <= 1) {
                     intent = new Intent(activity, ProgressContentActivity.class);
@@ -95,12 +79,25 @@ public class ProgressContentRecyclerViewAdapter extends RecyclerView.Adapter<Pro
         });
     }
 
+
+
     @Override
     public int getItemCount() {
         /*return cards.size();*/
         return cotnents.size();
     }
 
+    public final static class ProgressViewHolder extends RecyclerView.ViewHolder {
+        TextView cotnent;
+        LinearLayout lL;
+
+
+        ProgressViewHolder(View itemView) {
+            super(itemView);
+            cotnent = (TextView)itemView.findViewById(R.id.item_progress_main_content_textview);
+            lL = (LinearLayout)itemView.findViewById(R.id.item_progress_main_content_linearlayout);
+        }
+    }
 
     public ArrayList<String> getProgressItem(){
         return cotnents;

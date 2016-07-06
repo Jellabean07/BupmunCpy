@@ -15,8 +15,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Rank.RankTodayPage.RankTodayFragment;
-import com.wonbuddism.bupmun.Rank.RankVillagePage.RankVillageFragemnet;
 import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
 
 import java.util.ArrayList;

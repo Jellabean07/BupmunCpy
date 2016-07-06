@@ -3,15 +3,13 @@ package com.wonbuddism.bupmun.Rank;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Rank.RankTodayPage.RankUserInfo;
+import com.wonbuddism.bupmun.DataVo.RankUserInfo;
 import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
-import com.wonbuddism.bupmun.Utility.LoaderViewHolder;
 
 import java.util.List;
 

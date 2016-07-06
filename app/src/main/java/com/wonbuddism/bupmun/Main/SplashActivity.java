@@ -10,7 +10,6 @@ import android.os.Bundle;
 import com.wonbuddism.bupmun.Database.ExcelToDb;
 import com.wonbuddism.bupmun.Login.LoginMainActivity;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Database.ExcelToDatabase;
 
 public class SplashActivity extends AppCompatActivity {
 
