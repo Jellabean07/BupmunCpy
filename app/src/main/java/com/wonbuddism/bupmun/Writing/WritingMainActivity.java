@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
 import com.wonbuddism.bupmun.Database.DbAdapter;
 import com.wonbuddism.bupmun.Database.TYPING_HIST;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingNext;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingPrevious;
 import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingValue;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.AlertDialogYN;
@@ -79,7 +81,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing_main);
-
+        setLayout();
         setBupmun();
        // setData();
        // DataReceiver();
@@ -163,7 +165,6 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
 
 
     public void DataImport(){
-
         paragraph = hrb.getPARAGRAPH_NO();
         Log.e("paragraph", paragraph + "");
         for(int i=0; i<paragraph;i++){
@@ -189,7 +190,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         }
 
         Log.e("content_size", content.size() + "");
-        DataImport();
+        DataImport(); //이전 사경내용 불러오기
 
         if(paragraph<content.size()){
             words = splitManager.TextSplit(content.get(paragraph));
@@ -254,19 +255,6 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-
-
-   /* private void TypingTempExport(){
-        int TYPING_CNT = 1; //	사경횟수	SMALLINT
-        String TYPING_ID = new PrefUserInfoManager(WritingMainActivity.this).getUserInfo().getTYPING_ID(); //	사경아이디	CHARACTER
-        String BUPMUNINDEX = bupmunitem.getBUPMUNINDEX(); //	법문인덱스키	VARCHAR
-        int PARAGRAPH_NO = paragraph; //	문단번호	SMALLINT
-        String CHNS_YN = "M"; //	한자포함여부	CHARACTER
-        String REGIST_TIME =  new SimpleDateFormat("HHmmss").format(new Date(System.currentTimeMillis())) ; //	사경시간	CHARACTER
-        String RMRK = typingSupport.getTempLog();
-        TYPING_HIST_LOCAL tempLog = new TYPING_HIST_LOCAL(TYPING_CNT,TYPING_ID,BUPMUNINDEX,PARAGRAPH_NO,CHNS_YN,REGIST_TIME,RMRK);
-        typingDbManager.Export_TYPING_HIST_LOCAL(tempLog);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -342,11 +330,13 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()){
             case R.id.writing_imageview_next:
                 direction = 1;
-                MoveContent(bupmunitem.getNO()+1);
+               // MoveContent(bupmunitem.getNO()+1);
+                NextBupmun();
                 break;
             case R.id.writing_imageview_before:
                 direction = -1;
-                MoveContent(bupmunitem.getNO()-1);
+                PreviousBupmun();
+               // MoveContent(bupmunitem.getNO()-1);
                 break;
         }
     }
@@ -369,6 +359,20 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         dbAdapter.close();
     }
 
+    private void NextBupmun(){
+        typingSupport.AdapterClearDataSetChanged();
+        HttpConnWritingNext hcwn = new HttpConnWritingNext(this,hrb.getBUPMUNINDEX(),hrb.getBUPMUNSORT());
+        hcwn.setOnListener(this);
+        hcwn.execute();
+    }
+
+    private void PreviousBupmun(){
+        typingSupport.AdapterClearDataSetChanged();
+        HttpConnWritingPrevious hcwp = new HttpConnWritingPrevious(this,hrb.getBUPMUNINDEX(),hrb.getBUPMUNSORT());
+        hcwp.setOnListener(this);
+        hcwp.execute();
+    }
+
     //커스텀 리스너
     @Override
     public void TypingFinish() {
@@ -376,10 +380,12 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         if(words.get(0).equals("\r")){
             switch (direction){
                 case 1:
-                    MoveContent(bupmunitem.getNO() + 1);
+                    //MoveContent(bupmunitem.getNO() + 1);
+                    NextBupmun();
                     break;
                 case -1:
-                    MoveContent(bupmunitem.getNO()-1);
+                    PreviousBupmun();
+                   // MoveContent(bupmunitem.getNO()-1);
                     break;
             }
             Toast.makeText(WritingMainActivity.this,"다음 법문",Toast.LENGTH_SHORT).show();
@@ -390,16 +396,18 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
                 NextParagraph();
                 //typingDbManager.Delete_TYPING_HIST_LOCAL(bupmunitem.getBUPMUNINDEX(), paragraph - 1);
             }else{
-                MoveContent(bupmunitem.getNO()+1);
+                //MoveContent(bupmunitem.getNO()+1);
+                NextBupmun();
                 Toast.makeText(WritingMainActivity.this,"다음 법문",Toast.LENGTH_SHORT).show();
             }
         }
     }
 
 
+
     @Override
     public void WritingListener(HttpResultBupmun hrb) {
-        setLayout();
+
         MainTitle.setText(hrb.getTITLE1());
         fullTitle.setText(hrb.getTITLE1() + " " + hrb.getTITLE2() + " " +
                 hrb.getTITLE3() + " " + hrb.getTITLE4());

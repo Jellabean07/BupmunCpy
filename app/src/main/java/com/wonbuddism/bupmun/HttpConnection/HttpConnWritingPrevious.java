@@ -1,10 +1,8 @@
 package com.wonbuddism.bupmun.HttpConnection;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Writing.HTTPconnection.HttpResultBupmun;
@@ -23,21 +21,30 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by csc-pc on 2016. 7. 6..
+ * Created by csc-pc on 2016. 7. 12..
  */
-public class HttpConnWritingValue extends AsyncTask<Void,Void,Void> {
+public class HttpConnWritingPrevious extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
-    private String http_conection_url = "http://115.91.201.9/meditation";
+    private String TAG = "HttpConnWritingPrevious";
+    private String http_conection_url = "http://115.91.201.9/meditation/previous";
     private String http_login_otp = "otp";
+    private String http_index = "index";
+    private String http_sort = "sort";
     private String responseResult;
     private String OTP;
-    private String TAG = "HttpConnWritingValue";
+    private String index;
+    private String sort;
+
+
+
     private HttpConnWritingListener listener;
 
-    public HttpConnWritingValue(Activity activity) {
+    public HttpConnWritingPrevious(Activity activity, String index, String sort) {
         this.activity = activity;
         this.OTP = new PrefUserInfoManager(this.activity).getOTP();
+        this.index = index;
+        this.sort = sort;
         Log.e("OTP", this.OTP);
     }
 
@@ -50,7 +57,9 @@ public class HttpConnWritingValue extends AsyncTask<Void,Void,Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        String postData = http_login_otp + "=" + OTP;
+        String postData = http_login_otp + "=" + OTP
+                + "&" + http_index + "=" + index
+                + "&" + http_sort + "=" + sort;
 
         try {
             URL url = new URL(http_conection_url);
@@ -120,7 +129,7 @@ public class HttpConnWritingValue extends AsyncTask<Void,Void,Void> {
             Log.e(TAG,"성공");
             HttpResultBupmun httpResult = null;
             for(HttpResultBupmun htb : getList(resulDataList)){
-               httpResult = htb;
+                httpResult = htb;
             }
             listener.WritingListener(httpResult);
             //HttpResultBupmun httpResult = getObject(resultData);
