@@ -124,8 +124,6 @@ public class BoardSearchActivity extends AppCompatActivity implements View.OnCli
             addItems();
         }
 
-
-
     }
 
     private String getTypeData(){

@@ -23,13 +23,11 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
     private String TAG = "HTTPconnSyncUp";
     private String http_conection_url = "http://115.91.201.9/sync/select";
     private String http_otp ="otp";
-    private String http_page_no = "page_no";
     private String http_paragraph_no = "paragraph_no";
     private String http_tasu = "tasu";
     private String http_index= "index";
     private String responseResult;
     private String OTP;
-    private String PAGE_NO;
     private String PARAGRAPH_NO;
     private String TASU;
     private String INDEX;
@@ -38,13 +36,12 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
     index (varchar)*/
 
 
-    public HTTPconnSyncUp(Activity activity, TYPING_HIST typing_hist) {
+    public HTTPconnSyncUp(Activity activity, HttpParamBupmun hpb) {
         this.activity = activity;
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
-        this.PARAGRAPH_NO = String.valueOf(typing_hist.getPARAGRAPH_NO());
-        this.TASU = String.valueOf(typing_hist.getTASU());
-        this.INDEX = typing_hist.getBUPMUNINDEX();
-        this.PAGE_NO = "0"; //임시
+        this.PARAGRAPH_NO = String.valueOf(hpb.getPARAGRAPH_NO());
+        this.TASU = String.valueOf(hpb.getTASU());
+        this.INDEX = hpb.getBupmunindex();
     }
 
 
@@ -57,7 +54,6 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
         String postData =  http_otp +"="+OTP+"&"+http_paragraph_no +"="+PARAGRAPH_NO
-                +"&"+http_page_no +"="+PAGE_NO
                 +"&"+http_tasu +"="+TASU +"&"+http_index +"="+INDEX;
 
         try {
@@ -122,6 +118,7 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
         } else if (responseCode.contains("00")) {
             //  00 : 정상
 
+            Toast.makeText(activity,"사경성공",Toast.LENGTH_SHORT).show();
             // resultdata; -> 성공여부
             //Toast.makeText(activity,"오류신고가 정상적으로 처리 되었습니다",Toast.LENGTH_SHORT).show();
 

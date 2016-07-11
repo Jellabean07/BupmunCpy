@@ -24,10 +24,15 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.Database.BUPMUN_TYPING_INDEX;
 import com.wonbuddism.bupmun.Database.DbAdapter;
 import com.wonbuddism.bupmun.Database.TYPING_HIST;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingValue;
 import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Utility.AlertDialogYN;
 import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
 import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Writing.HTTPconnection.HTTPconnSyncUp;
+import com.wonbuddism.bupmun.Writing.HTTPconnection.HttpParamBupmun;
+import com.wonbuddism.bupmun.Writing.HTTPconnection.HttpResultBupmun;
+import com.wonbuddism.bupmun.Writing.TypingProcess.HttpConnWritingListener;
 import com.wonbuddism.bupmun.Writing.TypingProcess.TextSplitManager;
 import com.wonbuddism.bupmun.Writing.TypingProcess.TypingDbManager;
 import com.wonbuddism.bupmun.Writing.TypingProcess.TypingFinishListener;
@@ -38,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WritingMainActivity extends AppCompatActivity implements View.OnClickListener, TypingFinishListener {
+public class WritingMainActivity extends AppCompatActivity implements View.OnClickListener, TypingFinishListener, HttpConnWritingListener {
 
     private DrawerLayout mDrawerLayout;
     private TextView fullTitle;
@@ -64,21 +69,29 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     private int paragraph;
 
     private SharedPreferences pref;
-
     private SharedPreferences.Editor editor;
 
     private int direction = 1; //1 오른쪽 -1 왼쪽
 
+    private HttpResultBupmun hrb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing_main);
-        setData();
-        DataReceiver();
-        setLayout();
-        DataProcess();
-        setTitle();
+
+        setBupmun();
+       // setData();
+       // DataReceiver();
+       // setLayout();
+       // DataProcess();
+       // setTitle();
+    }
+
+    private void setBupmun() {
+        HttpConnWritingValue hcwv = new HttpConnWritingValue(this);
+        hcwv.setOnListener(this);
+        hcwv.execute();
     }
 
     private void setData() {
@@ -150,9 +163,9 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
 
 
     public void DataImport(){
-        dbAdapter.open();
-        paragraph = dbAdapter.getTypingPargarphCount(bupmunitem.getBUPMUNINDEX());
-        Log.e("paragraph",paragraph+"");
+
+        paragraph = hrb.getPARAGRAPH_NO();
+        Log.e("paragraph", paragraph + "");
         for(int i=0; i<paragraph;i++){
             words = splitManager.TextSplit(content.get(i));
             for(int j = 0; j<words.size();j++){
@@ -160,7 +173,6 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
             }
         }
         typingSupport.AdapterDataSetChanged();
-        dbAdapter.close();
 
         Log.e("DataImport", "햇음");
     }
@@ -171,8 +183,8 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         content = new ArrayList<>();
         splitManager=new TextSplitManager(this, textLine);
 
-        content.add(bupmunitem.getSHORTTITLE());
-        for(String s : bupmunitem.getCONTENTS_KOR().split("\r")){
+        content.add(hrb.getSHORTTITLE());
+        for(String s : hrb.getCONTENTS_KOR().split("\r")){
             content.add(s.trim());
         }
 
@@ -230,17 +242,13 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void TypingLogWrite(){  //단락저장
-        int TYPING_CNT = 1; //	사경횟수	SMALLINT
-        String TYPING_ID = new PrefUserInfoManager(WritingMainActivity.this).getUserInfo().getTYPING_ID(); //	사경아이디	CHARACTER
-        //String TYPING_ID = "00000000"; //	사경아이디	CHARACTER
-        String BUPMUNINDEX = bupmunitem.getBUPMUNINDEX(); //	법문인덱스키	VARCHAR
-        int PARAGRAPH_NO = paragraph; //	문단번호	SMALLINT
-        String CHNS_YN = "M"; //	한자포함여부	CHARACTER
-        int TASU = content.get(paragraph).length(); //	타수	SMALLINT
-        String REGIST_DATE =  new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis())); //	사경일	CHARACTER
-        String REGIST_TIME =  new SimpleDateFormat("HHmmss").format(new Date(System.currentTimeMillis())) ; //	사경시간	CHARACTER
-        TYPING_HIST item = new TYPING_HIST(TYPING_CNT,TYPING_ID,BUPMUNINDEX,PARAGRAPH_NO,CHNS_YN,TASU,REGIST_DATE,REGIST_TIME);
-        typingDbManager.Export_TYPING_HIST(item);
+
+        int paragraph_no = paragraph; //	문단번호	SMALLINT
+        String bupmunindex = this.hrb.getBUPMUNINDEX();
+        int tasu = content.get(paragraph).length(); //	타수	SMALLIN
+
+        HttpParamBupmun hpb = new HttpParamBupmun(paragraph_no,bupmunindex,tasu);
+        new HTTPconnSyncUp(this,hpb).execute();
         Log.e("TypingLogWrite", "햇음");
        // new LogRegistManager(this).LogRegist(bupmunitem,paragraph,content);
     }
@@ -389,4 +397,17 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     }
 
 
+    @Override
+    public void WritingListener(HttpResultBupmun hrb) {
+        setLayout();
+        MainTitle.setText(hrb.getTITLE1());
+        fullTitle.setText(hrb.getTITLE1() + " " + hrb.getTITLE2() + " " +
+                hrb.getTITLE3() + " " + hrb.getTITLE4());
+        textLine.setText(hrb.getSHORTTITLE());
+
+        this.hrb = hrb;
+        this.bupmunindex = hrb.getBUPMUNINDEX();
+
+        DataProcess();
+    }
 }

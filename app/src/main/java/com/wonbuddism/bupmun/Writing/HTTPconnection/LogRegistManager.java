@@ -38,17 +38,7 @@ public class LogRegistManager {
 
     }
 
-    public void LogRegist(BUPMUN_TYPING_INDEX bupmunitem, int paragraph, ArrayList<String> content){
-        item = getLog(bupmunitem, paragraph, content);
-        typingDbManager.Export_TYPING_HIST(item);
-        if(new PrefNetworkStatusManager(activity).getNetworkStatus()){ //통신
-            new HTTPconnSyncUp(activity,item).execute();
-            Log.e("통신","통신중");
-        }else{ // 비통신
-            typingDbManager.Export_TYPING_HIST_LOCAL(item);
-            Log.e("통신", "비통신중");
-       }
-    }
+
 
     private TYPING_HIST getLog(BUPMUN_TYPING_INDEX bupmunitem, int paragraph, ArrayList<String> content){
         int TYPING_CNT = 1; //	사경횟수	SMALLINT
