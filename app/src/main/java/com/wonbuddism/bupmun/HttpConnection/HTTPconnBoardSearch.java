@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Board.BoardArticleListViewAdapter;
 import com.wonbuddism.bupmun.DataVo.BoardArticle;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -180,6 +180,11 @@ public class HTTPconnBoardSearch extends AsyncTask<Void,Void,Void>{
             total.setText("0");
             Toast.makeText(activity,"검색결과가 없습니다",Toast.LENGTH_SHORT).show();
             // 02 : 필수항목누락
+
+        } else if (responseCode.contains("03")) {
+            Toast.makeText(activity,"로그인이 만료되었습니다",Toast.LENGTH_SHORT).show();
+            // 03 : 로그인 만료
+            new HttpConnLogout(activity).execute();
 
         }
     }

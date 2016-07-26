@@ -164,7 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_marginRight="18dp"
+                        android:layout_marginRight="38dp"
                         android:text="사경진도표"
                         android:textColor="@android:color/white"
                         android:textSize="20dp"  />

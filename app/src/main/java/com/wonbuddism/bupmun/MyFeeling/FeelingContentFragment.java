@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.wonbuddism.bupmun.DataVo.FeelingMemo;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingAll;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
+import com.wonbuddism.bupmun.Common.RecyclerViewScrollListener;
 
 
 import java.util.ArrayList;

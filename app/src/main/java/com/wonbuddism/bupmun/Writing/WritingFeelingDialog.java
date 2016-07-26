@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.wonbuddism.bupmun.DataVo.FeelingMemo;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingSplit;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
+import com.wonbuddism.bupmun.Common.ListViewFooterManager;
 
 import java.util.ArrayList;
 

@@ -27,15 +27,16 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.BoardComment;
 import com.wonbuddism.bupmun.DataVo.BoardDetail;
-import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardCommDelete;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnBoardCommDelete;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardCommList;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardCommRegist;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardDelete;
+import com.wonbuddism.bupmun.Listener.BoardCommDeleteListener;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.CustomLinearLayoutManager;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
-import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
+import com.wonbuddism.bupmun.Common.CustomLinearLayoutManager;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.Common.RecyclerViewScrollListener;
 
 import java.util.ArrayList;
 
@@ -328,7 +329,7 @@ public class BoardDetailActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void DeleteItem(BoardComment comment) {
-        new HTTPconnBoardCommDelete(this,boardDetail.getBoardno(),boardDetail.getWriteno(),comment.getSeqno()).execute();
+        new HttpConnBoardCommDelete(this,boardDetail.getBoardno(),boardDetail.getWriteno(),comment.getSeqno()).execute();
         refreshAdapter();
     }
 

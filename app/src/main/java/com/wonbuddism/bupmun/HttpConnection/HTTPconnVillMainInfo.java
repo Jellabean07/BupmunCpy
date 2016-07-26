@@ -8,8 +8,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.VillageMainInfo;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Village.VillageJoinListDaialog;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Dialog.VillageJoinListDaialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -140,6 +140,11 @@ public class HTTPconnVillMainInfo extends AsyncTask<Void,Void,Void>{
         } else if (responseCode.contains("02")) {
             Toast.makeText(activity,"동네방네 목록을 가져오지 못했습니다",Toast.LENGTH_SHORT).show();
             // 02 : 필수항목누락
+
+        }else if (responseCode.contains("03")) {
+            Toast.makeText(activity,"로그인이 만료되었습니다",Toast.LENGTH_SHORT).show();
+            // 03 : 로그인 만료
+            new HttpConnLogout(activity).execute();
 
         }
 

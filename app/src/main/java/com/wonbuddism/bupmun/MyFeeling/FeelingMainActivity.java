@@ -1,6 +1,5 @@
 package com.wonbuddism.bupmun.MyFeeling;
 
-import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
+import com.wonbuddism.bupmun.Common.NavigationDrawerMenu;
 
 import java.util.ArrayList;
 import java.util.List;

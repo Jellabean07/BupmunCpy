@@ -7,7 +7,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,18 +14,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wonbuddism.bupmun.Database.DbAdapter;
-import com.wonbuddism.bupmun.HttpConnection.HTTPconnectionLogout;
-import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingValue;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnLogout;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnMainProgressRate;
+import com.wonbuddism.bupmun.DataVo.HttpResultProgressRate;
+import com.wonbuddism.bupmun.Listener.MainProgressRateListener;
 import com.wonbuddism.bupmun.Login.LoginMainActivity;
 import com.wonbuddism.bupmun.Progress.ProgressMainActivity;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Writing.TypingProcess.TypingLogDbAdapter;
+import com.wonbuddism.bupmun.Common.NavigationDrawerMenu;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Writing.WritingMainActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainProgressRateListener {
 
     private DrawerLayout mDrawerLayout;
     private TextView tv_login;
@@ -43,18 +42,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toast toast;
 
 
-    private DbAdapter bupmunDbAdapter;
-    private TypingLogDbAdapter typingLogDbAdapter;
-    private int dbParagraph;
-    private int currentParaprah;
+    private int totalParagraph = 1;
+    private int currentParaprah = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setData();
         setLayout();
 
+    }
+
+    private void setData() {
+        HttpConnMainProgressRate httpConnMainProgressRate = new HttpConnMainProgressRate(this);
+        httpConnMainProgressRate.setProgressRateListener(this);
+        httpConnMainProgressRate.execute();
     }
 
     private void setLayout(){
@@ -78,10 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         LoginStateCheck();
 
-        Log.e("progressValue", getProgress() + "");
-        int progessValue = getProgress();
-        pb_ring.setProgress(progessValue);
-        tv_rating.setText(progessValue+"%");
+        setProgress();
+
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
@@ -94,46 +95,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new NavigationDrawerMenu(this,mDrawerLayout).setupDrawerContent(navigationView);
         }
 
-
-     /*   Animation an = new RotateAnimation(0.0f, 90.0f, 250f, 273f);
-        an.setFillAfter(true);
-        pb.startAnimation(an);*/
     }
 
-    private void getDbParagraph(){
-        this.bupmunDbAdapter = new DbAdapter(MainActivity.this);
-        bupmunDbAdapter.open();
-        bupmunDbAdapter.beginTransaction();
-        try{
-            dbParagraph = bupmunDbAdapter.getBupmunParagraphCount();
-            Log.e("dbParagraph",dbParagraph+"");
-            bupmunDbAdapter.setTransaction();
-        }catch (Exception e){
-        }finally {
-            bupmunDbAdapter.endTransaction();
-        }
-        bupmunDbAdapter.close();
-    }
 
-    private void getCurrentParagraph(){
-        this.typingLogDbAdapter = new TypingLogDbAdapter(MainActivity.this);
-        typingLogDbAdapter.open();
-        typingLogDbAdapter.beginTransaction();
-        try{
-            currentParaprah = typingLogDbAdapter.getCount();
-            Log.e("currentParaprah",currentParaprah+"");
-            typingLogDbAdapter.setTransaction();
-        }catch (Exception e){
-        }finally {
-            typingLogDbAdapter.endTransaction();
-        }
-        typingLogDbAdapter.close();
-    }
+    private void setProgress(){
+        int progessValue = currentParaprah/totalParagraph;
 
-    private int getProgress(){
-        getDbParagraph();
-        getCurrentParagraph();
-        return currentParaprah/dbParagraph;
+        pb_ring.setProgress(progessValue);
+        tv_rating.setText(progessValue+"%");
     }
 
     public void LoginStateCheck(){
@@ -166,17 +135,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!new PrefUserInfoManager(this).getLoginState()){
                     startActivityForResult(new Intent(MainActivity.this, LoginMainActivity.class),1000);
                 }else{
-                    /*finish();
-                    new PrefUserInfoManager(this).LogOut();*/
-                   /* Dialog dialog = new ProgressWaitDaialog(this);
-                    dialog.show();*/
-                    new HTTPconnectionLogout(this).execute();
-
+                    new HttpConnLogout(this).execute();
                 }
 
-                break;
-            case R.id.include_main_sync_textview:
-                new HttpConnWritingValue(this).execute();
                 break;
             case R.id.include_main_progress_btn:
                 startActivity(new Intent(MainActivity.this, ProgressMainActivity.class));
@@ -213,9 +174,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toast.show();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
+        setData();
         LoginStateCheck();
     }
 
@@ -225,5 +188,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(resultCode == 1000){
             finish();
         }
+    }
+
+    @Override
+    public void progressRate(HttpResultProgressRate httpResult) {
+        totalParagraph = httpResult.getTotalexp();
+        currentParaprah = httpResult.getExp();
+        setProgress();
+
     }
 }

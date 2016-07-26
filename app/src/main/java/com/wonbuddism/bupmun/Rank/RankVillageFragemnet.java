@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.wonbuddism.bupmun.DataVo.RankVillageInfo;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnRankVillage;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
+import com.wonbuddism.bupmun.Common.RecyclerViewScrollListener;
 
 import java.util.ArrayList;
 

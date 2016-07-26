@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.wonbuddism.bupmun.DataVo.FeelingMemo;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
+import com.wonbuddism.bupmun.Common.FooterLoaderAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

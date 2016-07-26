@@ -20,8 +20,8 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.DataVo.BoardArticle;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardSearch;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
-import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.Common.ListViewFooterManager;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 
 import org.angmarch.views.NiceSpinner;
 

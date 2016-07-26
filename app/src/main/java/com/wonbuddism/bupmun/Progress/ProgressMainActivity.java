@@ -12,29 +12,35 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.wonbuddism.bupmun.DataVo.HttpParamProgress;
+import com.wonbuddism.bupmun.DataVo.HttpResultProgress;
 import com.wonbuddism.bupmun.Database.DbAdapter;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnProgressTitle;
+import com.wonbuddism.bupmun.Listener.ProgressReponseListener;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.CustomLinearLayoutManager;
-import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
+import com.wonbuddism.bupmun.Common.CustomLinearLayoutManager;
+import com.wonbuddism.bupmun.Common.NavigationDrawerMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgressMainActivity extends AppCompatActivity {
+import butterknife.ButterKnife;
+
+public class ProgressMainActivity extends AppCompatActivity implements ProgressReponseListener {
 
     private ViewPager paper;
     private List<Fragment> listData;
     private ImageView pageDot;
     private DrawerLayout mDrawerLayout;
+
+    private ProgressRecyclerViewAdapter adapter;
+    private ArrayList<HttpResultProgress> httpResults;
+    private HttpParamProgress httpParam;
 
     private ArrayList<String> contents;
     private RecyclerView rv;
@@ -58,13 +64,43 @@ public class ProgressMainActivity extends AppCompatActivity {
 
     }
 
-    public void setLayout(){
+    private void setupAdapter(){
+        httpResults = new ArrayList<>();
+        adapter = new ProgressRecyclerViewAdapter(this,httpResults);
+        adapter.setHasStableIds(true);
+
+    }
+
+    private void setupRecyclerView(final RecyclerView recyclerView) {
         final CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        setupAdapter();
+        recyclerView.setAdapter(adapter);
+        setContentData("정전", "0");
+        recyclerView.setNestedScrollingEnabled(false);
+
+    }
+
+    private void setContentData(String key, String code){
+        String index = code;
+        String title_no = "0";
+        String depth = "T";
+
+        httpParam = new HttpParamProgress(index,title_no,depth);
+
+        HttpConnProgressTitle httpConnProgressTitle =  new HttpConnProgressTitle(this,httpParam);
+        httpConnProgressTitle.setOnResponseListener(this);
+        httpConnProgressTitle.execute();
+
+    }
+
+    public void setLayout(){
+        ButterKnife.bind(this);
+
+
         rv=(RecyclerView)findViewById(R.id.progress_recycler_view);
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(layoutManager);
-        rv.setNestedScrollingEnabled(false);
-        setContentData("정전");
+        setupRecyclerView(rv);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.progress_drawer_layout);
         pageDot = (ImageView)findViewById(R.id.progress_viewpage_page1);
@@ -154,53 +190,39 @@ public class ProgressMainActivity extends AppCompatActivity {
     public void infoChange(int position){
         switch (position){
             case 0:
-                setContentData("정전");
+                setContentData("정전","0");
                 break;
             case 1:
-                setContentData("대종경");
+                setContentData("대종경","1");
                 break;
             case 2:
-                setContentData("불조요경");
+                setContentData("불조요경","2");
                 break;
             case 3:
-                setContentData("예전");
+                setContentData("예전","3");
                 break;
             case 4:
-                setContentData("정산종사법어");
+                setContentData("정산종사법어","4");
                 break;
             case 5:
-                setContentData("대산종사법어");
+                setContentData("대산종사법어","5");
                 break;
             case 6:
-                setContentData("원불교교사");
+                setContentData("원불교교사","6");
                 break;
             default:
-                setContentData("정전");
+                setContentData("정전","0");
                 break;
         }
 
     }
 
-    private void loadBackdrop() {
-        final ImageView imageView = (ImageView) findViewById(R.id.progress_backdrop);
-        Glide.with(this).load(R.drawable.bg).centerCrop().into(imageView);
-    }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.progress_actionbar_menu, menu);
-        return true;
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            case R.id.progress_info:
-                Toast.makeText(this,"원을 클릭 하세요",Toast.LENGTH_SHORT).show();
                 return true;
 
         }
@@ -221,22 +243,11 @@ public class ProgressMainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    private void setContentData(String key){
-        dbAdapter=new DbAdapter(ProgressMainActivity.this);
-        dbAdapter.open();
-
-        contents = dbAdapter.getAllTitle2(key);
-        Log.e("content!!!",contents.toString());
-        dbAdapter.close();
-        initializeAdapter(key);
+    private void loadBackdrop() {
+        final ImageView imageView = (ImageView) findViewById(R.id.progress_backdrop);
+        Glide.with(this).load(R.drawable.bg).centerCrop().into(imageView);
     }
 
-    private void initializeAdapter(String title){
-        ProgressContentRecyclerViewAdapter recyclerViewAdapter = new ProgressContentRecyclerViewAdapter(ProgressMainActivity.this, title, contents);
-        rv.setAdapter(recyclerViewAdapter);
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -245,5 +256,15 @@ public class ProgressMainActivity extends AppCompatActivity {
             setResult(1000);
             finish();
         }
+    }
+
+    @Override
+    public void HttpResponse(ArrayList<HttpResultProgress> httpResults) {
+        adapter.setParameter(httpParam);
+        adapter.clear();
+        for(HttpResultProgress s : httpResults){
+            adapter.add(s);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

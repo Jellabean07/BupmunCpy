@@ -13,10 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wonbuddism.bupmun.DataVo.BoardComment;
+import com.wonbuddism.bupmun.Listener.BoardCommDeleteListener;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.FooterLoaderAdapter;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.Common.FooterLoaderAdapter;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

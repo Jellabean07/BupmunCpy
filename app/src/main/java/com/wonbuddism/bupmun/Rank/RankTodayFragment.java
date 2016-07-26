@@ -18,9 +18,8 @@ import com.wonbuddism.bupmun.DataVo.RankUserInfo;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnRankToday;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnRankTodayMy;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Rank.RankTodayRecyclerViewAdapter;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Utility.RecyclerViewScrollListener;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Common.RecyclerViewScrollListener;
 
 import java.util.ArrayList;
 import java.util.Collections;

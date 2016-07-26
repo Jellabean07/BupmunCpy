@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.DataVo.BoardDetail;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardModify;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 
 import org.angmarch.views.NiceSpinner;
 

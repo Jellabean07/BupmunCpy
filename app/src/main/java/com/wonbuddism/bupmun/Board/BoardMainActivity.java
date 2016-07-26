@@ -21,8 +21,8 @@ import android.widget.TextView;
 import com.wonbuddism.bupmun.DataVo.BoardArticle;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnBoardMainAll;
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.ListViewFooterManager;
-import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
+import com.wonbuddism.bupmun.Common.ListViewFooterManager;
+import com.wonbuddism.bupmun.Common.NavigationDrawerMenu;
 
 import java.util.ArrayList;
 

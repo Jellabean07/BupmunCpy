@@ -15,7 +15,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.wonbuddism.bupmun.R;
-import com.wonbuddism.bupmun.Utility.NavigationDrawerMenu;
+import com.wonbuddism.bupmun.Common.NavigationDrawerMenu;
 
 import java.util.ArrayList;
 import java.util.List;

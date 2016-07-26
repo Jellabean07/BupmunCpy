@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.RankMyInfo;
-import com.wonbuddism.bupmun.Utility.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,6 +126,11 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
         } else if (responseCode.contains("02")) {
             Toast.makeText(activity,"본인 랭킹을 불러오는데 실패하였습니다",Toast.LENGTH_SHORT).show();
             // 02 : 필수항목누락
+
+        }else if (responseCode.contains("03")) {
+            Toast.makeText(activity,"로그인이 만료되었습니다",Toast.LENGTH_SHORT).show();
+            // 03 : 로그인 만료
+            new HttpConnLogout(activity).execute();
 
         }else{
             Toast.makeText(activity,"본인 랭킹을 불러오는데 실패하였습니다",Toast.LENGTH_SHORT).show();

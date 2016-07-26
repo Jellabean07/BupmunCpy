@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.wonbuddism.bupmun.HttpConnection.HTTPconnectionLogin;
+import com.wonbuddism.bupmun.HttpConnection.HttpConnLogin;
 import com.wonbuddism.bupmun.R;
 
 public class LoginMainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -84,7 +84,7 @@ public class LoginMainActivity extends AppCompatActivity implements View.OnClick
         dialog.show();*/
 
 
-        new HTTPconnectionLogin(LoginMainActivity.this,id_value,pass_value).execute();
+        new HttpConnLogin(LoginMainActivity.this,id_value,pass_value).execute();
         //new HTTPconnSyncDown(this,"0").execute();
     }
 
