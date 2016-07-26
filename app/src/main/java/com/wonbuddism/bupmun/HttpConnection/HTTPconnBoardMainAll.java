@@ -193,6 +193,7 @@ public class HTTPconnBoardMainAll extends AsyncTask<Void,Void,Void>{
         String REPLYORDER = ""; //답글순서
         String USERID = ""; //작성자아이디
         String WRITETIME = ""; //작성일시
+        boolean NEW = false;
 
         try{
             BOARDNO = jInfo.getString("BOARDNO");
@@ -205,10 +206,12 @@ public class HTTPconnBoardMainAll extends AsyncTask<Void,Void,Void>{
             REPLYORDER = jInfo.getString("REPLYORDER");
             USERID = jInfo.getString("USERID");
             WRITETIME = jInfo.getString("WRITETIME");
+            NEW = jInfo.getBoolean("NEW");
+
         }catch (JSONException e){
             e.printStackTrace();
         }
-        BoardArticle info=new BoardArticle(BOARDNO,WRITENO,TITLE,READCNT,PARENTWRITENO,FOUNDERWRITENO,REPLYDEPTH,REPLYORDER,USERID,WRITETIME);
+        BoardArticle info=new BoardArticle(BOARDNO,WRITENO,TITLE,READCNT,PARENTWRITENO,FOUNDERWRITENO,REPLYDEPTH,REPLYORDER,USERID,WRITETIME,NEW);
         return info;
     }
 

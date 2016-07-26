@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.HttpParamBupmun;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,7 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
     private String PARAGRAPH_NO;
     private String TASU;
     private String INDEX;
+    private ProgressWaitDaialog daialog;
    /* paragraph_no (varchar)
     tasu (varchar)
     index (varchar)*/
@@ -42,12 +44,14 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
         this.PARAGRAPH_NO = String.valueOf(hpb.getPARAGRAPH_NO());
         this.TASU = String.valueOf(hpb.getTASU());
         this.INDEX = hpb.getBupmunindex();
+        this.daialog = new ProgressWaitDaialog(this.activity);
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        daialog.show();
     }
 
 
@@ -99,6 +103,8 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
         super.onPostExecute(aVoid);
         String responseCode = "";
         String resultData = "";
+        daialog.dismiss();
+
         if (responseResult != null) {
             try {
                 JSONObject jObj = new JSONObject(responseResult);
@@ -118,7 +124,7 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
         } else if (responseCode.contains("00")) {
             //  00 : 정상
 
-            Toast.makeText(activity,"사경성공",Toast.LENGTH_SHORT).show();
+         // Toast.makeText(activity,"사경성공",Toast.LENGTH_SHORT).show();
             // resultdata; -> 성공여부
             //Toast.makeText(activity,"오류신고가 정상적으로 처리 되었습니다",Toast.LENGTH_SHORT).show();
 

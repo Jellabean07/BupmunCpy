@@ -1,12 +1,14 @@
 package com.wonbuddism.bupmun.HttpConnection;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.DataVo.HttpResultBupmun;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 import com.wonbuddism.bupmun.Listener.HttpConnWritingListener;
 
 import org.json.JSONArray;
@@ -36,9 +38,7 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
     private String OTP;
     private String index;
     private String sort;
-
-
-
+    private ProgressWaitDaialog daialog;
     private HttpConnWritingListener listener;
 
     public HttpConnWritingNext(Activity activity, String index, String sort) {
@@ -47,12 +47,14 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
         this.index = index;
         this.sort = sort;
         Log.e("OTP", this.OTP);
+        this.daialog = new ProgressWaitDaialog(this.activity);
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        daialog.show();
     }
 
 
@@ -106,7 +108,7 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
         String responseCode = "";
         JSONObject resultData = null;
         JSONArray resulDataList = null;
-
+        daialog.dismiss();
         if (responseResult != null) {
             try {
                 JSONObject jObj = new JSONObject(responseResult);

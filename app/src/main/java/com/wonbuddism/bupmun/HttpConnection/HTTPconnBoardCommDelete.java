@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,7 @@ public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
     private String BOARDNO;
     private String WRITENO;
     private String SEQNO;
+    private ProgressWaitDaialog daialog;
 
 
     public HttpConnBoardCommDelete(Activity activity, String boardno, String writeno, String seqno) {
@@ -39,12 +41,14 @@ public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
         this.BOARDNO = boardno;
         this.WRITENO = writeno;
         this.SEQNO = seqno;
+        this.daialog = new ProgressWaitDaialog(this.activity);
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        daialog.show();
     }
 
 
@@ -96,6 +100,8 @@ public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
         super.onPostExecute(aVoid);
         String responseCode = "";
         String resultData = null;
+
+        daialog.dismiss();
 
         if (responseResult != null) {
             try {

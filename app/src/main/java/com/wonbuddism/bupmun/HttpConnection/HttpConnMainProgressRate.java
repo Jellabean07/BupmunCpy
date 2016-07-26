@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.HttpResultProgressRate;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 import com.wonbuddism.bupmun.Listener.MainProgressRateListener;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 
@@ -34,17 +35,20 @@ public class HttpConnMainProgressRate extends AsyncTask<Void,Void,Void> {
     private String TAG = "HttpConnMainProgressRate";
 
     private MainProgressRateListener listener;
+    private ProgressWaitDaialog daialog;
 
     public HttpConnMainProgressRate(Activity activity) {
         this.activity = activity;
         this.OTP = new PrefUserInfoManager(this.activity).getOTP();
         Log.e("OTP", this.OTP);
+        this.daialog = new ProgressWaitDaialog(this.activity);
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        daialog.show();
     }
 
 
@@ -95,7 +99,7 @@ public class HttpConnMainProgressRate extends AsyncTask<Void,Void,Void> {
         super.onPostExecute(aVoid);
         String responseCode = "";
         JSONArray resultData = null;
-
+        this.daialog.dismiss();
         if (responseResult != null) {
             try {
                 JSONObject jObj = new JSONObject(responseResult);

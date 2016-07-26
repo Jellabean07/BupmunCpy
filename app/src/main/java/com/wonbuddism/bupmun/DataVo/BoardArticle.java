@@ -12,13 +12,14 @@ public class BoardArticle {
     private String replyorder; //답글순서
     private String userid; //작성자아이디
     private String writetime; //작성일시
+    private boolean newarticle;
 
     public BoardArticle() {
     }
 
-    public BoardArticle(String boardno, String writeno, String title,
-                        String readcnt, String parentwriteno, String founderwriteno,
-                        String replydepth, String replyorder, String userid, String writetime) {
+    public BoardArticle(String boardno, String writeno, String title, String readcnt,
+                        String parentwriteno, String founderwriteno, String replydepth,
+                        String replyorder, String userid, String writetime, boolean newarticle) {
         this.boardno = boardno;
         this.writeno = writeno;
         this.title = title;
@@ -29,6 +30,16 @@ public class BoardArticle {
         this.replyorder = replyorder;
         this.userid = userid;
         this.writetime = writetime;
+        this.newarticle = newarticle;
+    }
+
+
+    public boolean getNewarticle() {
+        return newarticle;
+    }
+
+    public void setNewarticle(boolean newarticle) {
+        this.newarticle = newarticle;
     }
 
     public String getBoardno() {

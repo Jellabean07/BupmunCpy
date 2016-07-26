@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
     private String CATEGORY;
     private String CONTENT;
 
+    private ProgressWaitDaialog daialog;
 
     public HTTPconnWritingReport(Activity activity,String index,String category, String content) {
         this.activity = activity;
@@ -39,12 +41,14 @@ public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
         this.INDEX = index;
         this.CATEGORY = category;
         this.CONTENT = content;
+        this.daialog = new ProgressWaitDaialog(this.activity);
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        daialog.show();
     }
 
 
@@ -96,6 +100,8 @@ public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
         super.onPostExecute(aVoid);
         String responseCode = "";
         String resultData = "";
+        daialog.dismiss();
+
         if (responseResult != null) {
             try {
                 JSONObject jObj = new JSONObject(responseResult);

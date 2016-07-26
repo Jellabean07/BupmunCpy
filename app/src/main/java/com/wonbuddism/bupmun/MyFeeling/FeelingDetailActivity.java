@@ -19,7 +19,7 @@ import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingDelete;
 import com.wonbuddism.bupmun.HttpConnection.HTTPconnFeelingModify;
 import com.wonbuddism.bupmun.R;
 
-public class FeelingDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class FeelingDetailActivity extends AppCompatActivity {
 
     private NestedScrollView nsv;
     public static final String EXTRA_NAME = "feelingMemo";
@@ -31,9 +31,6 @@ public class FeelingDetailActivity extends AppCompatActivity implements View.OnC
     private Button btnModifiy;
     private FeelingMemo feelingMemo;
 
-    private TextView delete;
-    private TextView modify;
-    private LinearLayout managerLine;
 
     private int modifyStep;
 
@@ -55,13 +52,6 @@ public class FeelingDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setLayout() {
-        delete = (TextView)findViewById(R.id.feeling_detail_middle_manage_delete_textview);
-        modify = (TextView)findViewById(R.id.feeling_detail_middle_manage_modify_textview);
-        managerLine = (LinearLayout)findViewById(R.id.feeling_detail_middle_manage);
-
-        delete.setOnClickListener(this);
-        modify.setOnClickListener(this);
-
         title = (TextView)findViewById(R.id.feeling_detail_top_category_textview);
         short_title = (TextView)findViewById(R.id.feeling_detail_top_title_textview);
         date = (TextView)findViewById(R.id.feeling_detail_top_date_textview);
@@ -78,21 +68,18 @@ public class FeelingDetailActivity extends AppCompatActivity implements View.OnC
         nsv.smoothScrollTo(0, 0);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.menu_feeling_modify:
-                content.setVisibility(View.GONE);
-                contentModifiy.setVisibility(View.VISIBLE);
-                contentModifiy.setText(feelingMemo.getMemo_contents());
-                contentModifiy.setFocusableInTouchMode(true);
-                btnModifiy.setVisibility(View.VISIBLE);
-                return true;
             case R.id.menu_feeling_delete:
-                Toast.makeText(this,"삭제",Toast.LENGTH_SHORT).show();
+                new HTTPconnFeelingDelete(this,feelingMemo.getBupmunindex(),feelingMemo.getMemo_seq()).execute();
+                setResult(1000);
+                finish();
                 return true;
 
         }
@@ -105,39 +92,4 @@ public class FeelingDetailActivity extends AppCompatActivity implements View.OnC
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.feeling_detail_middle_manage_delete_textview:
-                new HTTPconnFeelingDelete(this,feelingMemo.getBupmunindex(),feelingMemo.getMemo_seq()).execute();
-                setResult(1000);
-                finish();
-                break;
-            case R.id.feeling_detail_middle_manage_modify_textview:
-                Log.e("modyfiy","step0");
-               switch (modifyStep){
-                   case 0:
-                       Log.e("modyfiy","step1");
-                       content.setVisibility(View.GONE);
-                       contentModifiy.setVisibility(View.VISIBLE);
-                       contentModifiy.setText(feelingMemo.getMemo_contents());
-                       contentModifiy.setFocusableInTouchMode(true);
-                       modify.setText("완료");
-                       modifyStep=1;
-                       Toast.makeText(this,"감각감상 수정후 완료를 눌러주세요",Toast.LENGTH_SHORT).show();
-
-                       break;
-                   case 1:
-                       Log.e("modyfiy","step2");
-                       new HTTPconnFeelingModify(this,feelingMemo.getBupmunindex(),
-                               feelingMemo.getMemo_seq(), contentModifiy.getText().toString()).execute();
-                       setResult(1000);
-                       modifyStep = 0;
-                       finish();
-                       break;
-               }
-                break;
-        }
-    }
 }

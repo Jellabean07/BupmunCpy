@@ -84,18 +84,20 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
-            <Button
+            <TextView
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:gravity="center"
                 android:id="@+id/dialog_writing_feeling_regist_regist_btn"
                 android:text="작성"
-                android:background="@drawable/view_board_search_box"/>
-            <Button
+                android:background="#ffffff"/>
+            <TextView
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:gravity="center"
                 android:id="@+id/dialog_writing_feeling_regist_cancel_btn"
                 android:text="취소"
-                android:background="@drawable/view_board_search_box"/>
+                android:background="#ffffff"/>
         </LinearLayout>
     </LinearLayout>
 

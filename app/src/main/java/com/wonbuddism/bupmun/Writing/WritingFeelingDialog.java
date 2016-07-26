@@ -131,58 +131,7 @@ public class WritingFeelingDialog extends Dialog implements View.OnClickListener
             addItems();
         }
     }
-    /*private ArrayList<FeelingItem> getSortList() {
-        ArrayList<FeelingItem> list = new ArrayList<>();
 
-        if(shortTitle.equals("일원상 신앙")){
-            list.add(new FeelingItem("1","와 좋다","정전","일원상신앙","2015.12.28"));
-            list.add(new FeelingItem("2","마음이 편해집니다","정전","일원상신앙","2015.12.28"));
-        }else  if(shortTitle.equals("개교의 동기")){
-            list.add(new FeelingItem("1","새벽감성","대종경","일원상신앙","2015.12.28"));
-            list.add(new FeelingItem("2","난 눈물이 좋다","대종경","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("3","나는 머리가 아닌","대종경","일원상신앙","2015.12.30"));
-        }else  if(shortTitle.equals("교법의 총설")){
-            list.add(new FeelingItem("1","난 가끔 눈물을 흘린다","원불교교사","일원상신앙","2015.12.28"));
-        }else  if(shortTitle.equals("일원상의 진리")){
-            list.add(new FeelingItem("1","가끔 눈물을 참을 수 없는 내가 별루다","불조요경","일원상신앙","2015.12.29"));
-        }else  if(shortTitle.equals("일원상의 수행")){
-            list.add(new FeelingItem("1","맘이 아파서","예전","일원상신앙","2015.12.29"));
-        }else  if(shortTitle.equals("일원상의 법어")){
-            list.add(new FeelingItem("1","좋은 거야..","정산종사법어","일원상신앙","2015.12.29"));
-        }else  if(shortTitle.equals("일원상 서원문")) {
-            list.add(new FeelingItem("1","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("2","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("3","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("4","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("5","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("6","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("7","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("8","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("9","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("10","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("11","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("12","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("13","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("14","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("15","뭐 꼭 슬펴야만 우는건아니잖아^^","대산종사법어","일원상신앙","2015.12.30"));
-            list.add(new FeelingItem("16","맘으로 우는 내가 좋다","대산종사법어","일원상신앙","2015.12.30"));
-
-        }
-
-        Collections.sort(list, new NoAscCompare());
-
-
-        return list;
-    }
-
-
-    static class NoAscCompare implements Comparator<FeelingItem> {
-        @Override
-        public int compare(FeelingItem arg0, FeelingItem arg1) {
-            //오름차순
-            return Integer.parseInt(arg0.getNo()) < Integer.parseInt(arg1.getNo()) ? -1 : Integer.parseInt(arg0.getNo()) > Integer.parseInt(arg1.getNo()) ? 1:0;
-        }
-    }*/
 
     @Override
     public void onClick(View v) {

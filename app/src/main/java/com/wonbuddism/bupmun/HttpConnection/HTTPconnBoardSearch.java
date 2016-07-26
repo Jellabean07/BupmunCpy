@@ -235,7 +235,7 @@ public class HTTPconnBoardSearch extends AsyncTask<Void,Void,Void>{
         }catch (JSONException e){
             e.printStackTrace();
         }
-        BoardArticle info=new BoardArticle(BOARDNO,WRITENO,TITLE,READCNT,PARENTWRITENO,FOUNDERWRITENO,REPLYDEPTH,REPLYORDER,USERID,WRITETIME);
+        BoardArticle info=new BoardArticle(BOARDNO,WRITENO,TITLE,READCNT,PARENTWRITENO,FOUNDERWRITENO,REPLYDEPTH,REPLYORDER,USERID,WRITETIME,false);
         return info;
     }
 }

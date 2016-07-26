@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.DataVo.HttpResultBupmun;
+import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 import com.wonbuddism.bupmun.Listener.HttpConnWritingListener;
 
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ public class HttpConnWritingPrevious extends AsyncTask<Void,Void,Void> {
     private String OTP;
     private String index;
     private String sort;
-
+    private ProgressWaitDaialog daialog;
 
 
     private HttpConnWritingListener listener;
@@ -46,6 +47,7 @@ public class HttpConnWritingPrevious extends AsyncTask<Void,Void,Void> {
         this.OTP = new PrefUserInfoManager(this.activity).getOTP();
         this.index = index;
         this.sort = sort;
+        this.daialog = new ProgressWaitDaialog(this.activity);
         Log.e("OTP", this.OTP);
     }
 
@@ -53,6 +55,7 @@ public class HttpConnWritingPrevious extends AsyncTask<Void,Void,Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        daialog.show();
     }
 
 
@@ -106,7 +109,7 @@ public class HttpConnWritingPrevious extends AsyncTask<Void,Void,Void> {
         String responseCode = "";
         JSONObject resultData = null;
         JSONArray resulDataList = null;
-
+        daialog.dismiss();
         if (responseResult != null) {
             try {
                 JSONObject jObj = new JSONObject(responseResult);

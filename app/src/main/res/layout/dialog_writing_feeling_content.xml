@@ -66,6 +66,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fillViewport="true"
                 android:scrollbars="none">
                 <EditText
                     android:layout_width="match_parent"
@@ -85,25 +86,28 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
-            <Button
+            <TextView
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:gravity="center"
                 android:id="@+id/dialog_writing_feeling_content_modifiy_btn"
                 android:text="수정"
-                android:background="@drawable/view_board_search_box"/>
-            <Button
+                android:background="#ffffff"/>
+            <TextView
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:gravity="center"
                 android:id="@+id/dialog_writing_feeling_content_delete_btn"
                 android:text="삭제"
-                android:background="@drawable/view_board_search_box"/>
+                android:background="#ffffff"/>
 
-            <Button
+            <TextView
                 android:layout_width="70dp"
                 android:layout_height="25dp"
+                android:gravity="center"
                 android:id="@+id/dialog_writing_feeling_content_cancel_btn"
                 android:text="취소"
-                android:background="@drawable/view_board_search_box"/>
+                android:background="#ffffff"/>
         </LinearLayout>
     </LinearLayout>
 

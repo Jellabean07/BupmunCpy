@@ -26,9 +26,9 @@ public class WritingFeelingContentDialog extends Dialog implements View.OnClickL
     private FeelingMemo item;
     private int state;
 
-    private Button modifiy;
-    private Button delete;
-    private Button cancel;
+    private TextView modifiy;
+    private TextView delete;
+    private TextView cancel;
 
     private TextView title;
     private TextView date;
@@ -48,9 +48,9 @@ public class WritingFeelingContentDialog extends Dialog implements View.OnClickL
     }
 
     private void setLayout() {
-        modifiy = (Button)findViewById(R.id.dialog_writing_feeling_content_modifiy_btn);
-        delete = (Button)findViewById(R.id.dialog_writing_feeling_content_delete_btn);
-        cancel = (Button)findViewById(R.id.dialog_writing_feeling_content_cancel_btn);
+        modifiy = (TextView)findViewById(R.id.dialog_writing_feeling_content_modifiy_btn);
+        delete = (TextView)findViewById(R.id.dialog_writing_feeling_content_delete_btn);
+        cancel = (TextView)findViewById(R.id.dialog_writing_feeling_content_cancel_btn);
         modifiy.setOnClickListener(this);
         delete.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -63,7 +63,7 @@ public class WritingFeelingContentDialog extends Dialog implements View.OnClickL
 
         Log.e("수정모드", "수정모드");
         title.setText(item.getShort_title());
-        date.setText(item.getRegist_date());
+        date.setText(item.getRegist_date().substring(0,10));
         content.setText(item.getMemo_contents());
 
 

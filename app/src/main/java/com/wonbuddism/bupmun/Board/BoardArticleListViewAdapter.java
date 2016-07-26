@@ -150,7 +150,7 @@ public class BoardArticleListViewAdapter extends BaseAdapter{
             comment_count.setText(mList.get(position).getReplydepth());
         }
 
-        if(!dateCompare(mList.get(position).getWritetime())){ //최신글 new 표시
+        if(!mList.get(position).getNewarticle()){ //최신글 new 표시
             new_img.setVisibility(convertView.GONE);
         }
 

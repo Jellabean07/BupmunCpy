@@ -120,8 +120,7 @@ public class HttpConnLogout extends AsyncTask<Void,Void,Void> {
             //  00 : 정상
 
             PrefUserInfo userInfo =  new PrefUserInfo();
-            new PrefUserInfoManager(activity).setUserInfo(userInfo);
-            new PrefUserInfoManager(activity).setLoginState(false);
+            new PrefUserInfoManager(activity).LogOut();
 
             activity.startActivity(new Intent(activity, LoginMainActivity.class)); // 로딩이 끝난후 이동할 Activity
             activity.finish(); // 로딩페이지 Activity Stack에서 제거

@@ -296,11 +296,14 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
             switch (direction){
                 case 1:
                     NextBupmun();
+                    Log.e(TAG, "NextBupmun");
                     break;
                 case -1:
                     PreviousBupmun();
+                    Log.e(TAG, "PreviousBupmun");
                     break;
             }
+
             Toast.makeText(WritingMainActivity.this,"다음 법문",Toast.LENGTH_SHORT).show();
         }else{
             UpLoad();

@@ -28,8 +28,8 @@ public class WritingFeelingRegistDialog extends Dialog implements View.OnClickLi
 
     private FeelingMemo item;
 
-    private Button regist;
-    private Button cancel;
+    private TextView regist;
+    private TextView cancel;
 
     private TextView title;
     private TextView date;
@@ -50,8 +50,8 @@ public class WritingFeelingRegistDialog extends Dialog implements View.OnClickLi
     }
 
     private void setLayout() {
-        regist = (Button)findViewById(R.id.dialog_writing_feeling_regist_regist_btn);
-        cancel = (Button)findViewById(R.id.dialog_writing_feeling_regist_cancel_btn);
+        regist = (TextView)findViewById(R.id.dialog_writing_feeling_regist_regist_btn);
+        cancel = (TextView)findViewById(R.id.dialog_writing_feeling_regist_cancel_btn);
         regist.setOnClickListener(this);
         cancel.setOnClickListener(this);
 
