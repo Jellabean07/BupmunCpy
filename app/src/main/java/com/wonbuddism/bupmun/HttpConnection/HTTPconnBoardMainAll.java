@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.Board.BoardArticleListViewAdapter;
 import com.wonbuddism.bupmun.DataVo.BoardArticle;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,7 @@ public class HTTPconnBoardMainAll extends AsyncTask<Void,Void,Void>{
 
     private Activity activity;
     private String TAG = "HTTPconnBoardMainAll";
-    private String http_conection_url = "http://115.91.201.9/board/all";
+    private String http_conection_url = "board/all";
     private String http_otp ="otp";
     private String http_boardno = "boardno";
     private String http_page_no = "page_no";
@@ -36,6 +37,7 @@ public class HTTPconnBoardMainAll extends AsyncTask<Void,Void,Void>{
     private String PAGE_NO;
     private BoardArticleListViewAdapter adapter;
     private TextView total;
+    private String http_host;
 
     public HTTPconnBoardMainAll(Activity activity,BoardArticleListViewAdapter adapter, TextView total, String page_no) {
         this.activity = activity;
@@ -45,6 +47,7 @@ public class HTTPconnBoardMainAll extends AsyncTask<Void,Void,Void>{
         this.BOARD_NO = "2800";
         this.total = total;
         this.adapter.addFooter();
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -59,7 +62,7 @@ public class HTTPconnBoardMainAll extends AsyncTask<Void,Void,Void>{
         String postData =  http_otp +"="+OTP + "&" + http_boardno +"="+BOARD_NO +  "&" + http_page_no +"="+PAGE_NO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

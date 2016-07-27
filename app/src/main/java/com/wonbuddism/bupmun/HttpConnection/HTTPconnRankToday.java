@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.RankUserInfo;
+import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Rank.RankTodayRecyclerViewAdapter;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 
@@ -24,12 +25,13 @@ import java.util.ArrayList;
 public class HTTPconnRankToday extends AsyncTask<Void,Void,Void> {
     private Activity activity;
     private String TAG = "HTTPconnectionRank";
-    private String http_conection_url = "http://115.91.201.9/rank/today";
+    private String http_conection_url = "rank/today";
     private String http_otp ="otp";
     private String http_page_no ="page_no";
     private String responseResult;
     private String OTP;
     private String PAGE_NO;
+    private String http_host;
     private RankTodayRecyclerViewAdapter adapter;
     private ArrayList<RankUserInfo> rankUserInfos;
 
@@ -41,6 +43,7 @@ public class HTTPconnRankToday extends AsyncTask<Void,Void,Void> {
         this.rankUserInfos = rankUserInfos;
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.PAGE_NO = page_no;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -55,7 +58,7 @@ public class HTTPconnRankToday extends AsyncTask<Void,Void,Void> {
         String postData =  http_otp +"="+OTP +"&"+http_page_no+"="+PAGE_NO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);
@@ -175,9 +178,9 @@ public class HTTPconnRankToday extends AsyncTask<Void,Void,Void> {
         String id="";
         if(jInfo !=null){
             try{
-                no = jInfo.getString("NO");
+                no = jInfo.getString("TODAY_RANK");
                 name = jInfo.getString("NAME");
-                id = jInfo.getString("ID");
+                id = jInfo.getString("USERID");
             }catch (JSONException e){
                 e.printStackTrace();
             }

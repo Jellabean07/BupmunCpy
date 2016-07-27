@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.Board.BoardDetailActivity;
 import com.wonbuddism.bupmun.DataVo.BoardDetail;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ public class HTTPconnBoardDetail extends AsyncTask<Void,Void,Void>{
 
     private Activity activity;
     private String TAG = "HTTPconnBoardDetail";
-    private String http_conection_url = "http://115.91.201.9/board/file/down";
+    private String http_conection_url = "board/file/down";
     private String http_otp ="otp";
     private String http_boardno ="boardno";
     private String http_writeno ="writeno";
@@ -35,6 +36,7 @@ public class HTTPconnBoardDetail extends AsyncTask<Void,Void,Void>{
     private String OTP;
     private String BOARDNO;
     private String WRITENO;
+    private String http_host;
 
 
     public HTTPconnBoardDetail(Activity activity,String boardno, String writeno) {
@@ -42,6 +44,7 @@ public class HTTPconnBoardDetail extends AsyncTask<Void,Void,Void>{
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.BOARDNO = boardno;
         this.WRITENO = writeno;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -56,7 +59,7 @@ public class HTTPconnBoardDetail extends AsyncTask<Void,Void,Void>{
         String postData =  http_otp +"="+OTP + "&" +http_boardno +"="+BOARDNO + "&" +http_writeno +"="+WRITENO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ import java.net.URL;
 public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HttpConnBoardCommDelete";
-    private String http_conection_url = "http://115.91.201.9/board/comment/remove";
+    private String http_conection_url = "board/comment/remove";
     private String http_otp ="otp";
     private String http_boardno ="boardno";
     private String http_writeno = "writeno";
@@ -33,6 +34,7 @@ public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
     private String WRITENO;
     private String SEQNO;
     private ProgressWaitDaialog daialog;
+    private String http_host;
 
 
     public HttpConnBoardCommDelete(Activity activity, String boardno, String writeno, String seqno) {
@@ -42,6 +44,7 @@ public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
         this.WRITENO = writeno;
         this.SEQNO = seqno;
         this.daialog = new ProgressWaitDaialog(this.activity);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -58,7 +61,7 @@ public class HttpConnBoardCommDelete extends AsyncTask<Void,Void,Void>{
                 + "&" +http_writeno +"="+WRITENO + "&" + http_seqno +"="+SEQNO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

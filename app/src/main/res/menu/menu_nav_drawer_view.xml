@@ -23,24 +23,31 @@
 
         <item
             android:id="@+id/nav_home"
+            android:icon="@drawable/home"
             android:title="홈" />
         <item
             android:id="@+id/nav_writing"
+            android:icon="@drawable/write"
             android:title="법문쓰기" />
         <item
             android:id="@+id/nav_progress"
+            android:icon="@drawable/progress"
             android:title="사경진도표" />
         <item
             android:id="@+id/nav_board"
+            android:icon="@drawable/board"
             android:title="게시판" />
         <item
             android:id="@+id/nav_feeling"
+            android:icon="@drawable/myfeeling"
             android:title="감각감상" />
         <item
             android:id="@+id/nav_club"
+            android:icon="@drawable/club"
             android:title="동네방네" />
         <item
             android:id="@+id/nav_ranking"
+            android:icon="@drawable/rank"
             android:title="랭킹" />
         <!--<item
             android:id="@+id/nav_logout"

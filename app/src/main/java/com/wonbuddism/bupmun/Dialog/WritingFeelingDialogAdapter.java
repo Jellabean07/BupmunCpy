@@ -1,4 +1,4 @@
-package com.wonbuddism.bupmun.Writing;
+package com.wonbuddism.bupmun.Dialog;
 
 import android.app.Activity;
 import android.content.Context;

@@ -90,7 +90,7 @@ public class WritingSCDialog extends Dialog implements View.OnClickListener {
         int id = v.getId();
         switch (id){
             case R.id.dialog_sc_dot_linearlayout:
-                sch = "·";
+                sch = "・";
                 break;
             case R.id.dialog_sc_1_linearlayout:
                 sch = "①";

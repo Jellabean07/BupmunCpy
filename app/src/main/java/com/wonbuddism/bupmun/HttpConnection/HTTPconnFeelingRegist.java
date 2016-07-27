@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +22,7 @@ import java.net.URL;
 public class HTTPconnFeelingRegist extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HTTPconnFeelingRegist";
-    private String http_conection_url = "http://115.91.201.9/memo/save";
+    private String http_conection_url = "memo/save";
     private String http_otp ="otp";
     private String http_index = "index";
     private String http_memo_contents = "content";
@@ -29,13 +30,14 @@ public class HTTPconnFeelingRegist extends AsyncTask<Void,Void,Void>{
     private String OTP;
     private String INDEX;
     private String MEMO_CONTENTS;
-
+    private String http_host;
 
     public HTTPconnFeelingRegist(Activity activity,String index, String memo_contents) {
         this.activity = activity;
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.INDEX = index;
         this.MEMO_CONTENTS = memo_contents;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -51,7 +53,7 @@ public class HTTPconnFeelingRegist extends AsyncTask<Void,Void,Void>{
                 + "&"+http_memo_contents+"="+MEMO_CONTENTS;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

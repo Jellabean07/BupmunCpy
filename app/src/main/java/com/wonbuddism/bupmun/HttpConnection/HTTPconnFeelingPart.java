@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.DataVo.FeelingMemo;
 import com.wonbuddism.bupmun.MyFeeling.FeelingRecycleViewAdapter;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class HTTPconnFeelingPart extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HTTPconnFeelingPart";
-    private String http_conection_url = "http://115.91.201.9/memo/part";
+    private String http_conection_url = "memo/part";
     private String http_otp ="otp";
     private String http_category = "category";
     private String http_page_no ="page_no";
@@ -34,6 +35,7 @@ public class HTTPconnFeelingPart extends AsyncTask<Void,Void,Void>{
     private String OTP;
     private String CATEGORY;
     private String PAGE_NO;
+    private String http_host;
 
     private FeelingRecycleViewAdapter adapter;
     private TextView totalCount;
@@ -46,7 +48,7 @@ public class HTTPconnFeelingPart extends AsyncTask<Void,Void,Void>{
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.CATEGORY = category;
         this.PAGE_NO = page_no;
-
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
 
     }
 
@@ -63,7 +65,7 @@ public class HTTPconnFeelingPart extends AsyncTask<Void,Void,Void>{
                 +"&"+http_page_no +"="+PAGE_NO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

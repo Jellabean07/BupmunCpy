@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ import java.net.URL;
 public class HTTPconnBoardDelete extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HTTPconnBoardDelete";
-    private String http_conection_url = "http://115.91.201.9/board/file/remove";
+    private String http_conection_url = "board/file/remove";
     private String http_otp ="otp";
     private String http_boardno ="boardno";
     private String http_writeno = "writeno";
@@ -30,6 +31,7 @@ public class HTTPconnBoardDelete extends AsyncTask<Void,Void,Void>{
     private String OTP;
     private String BOARDNO;
     private String WRITENO;
+    private String http_host;
 
 
     public HTTPconnBoardDelete(Activity activity,String boardno, String writeno) {
@@ -37,7 +39,7 @@ public class HTTPconnBoardDelete extends AsyncTask<Void,Void,Void>{
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.BOARDNO = boardno;
         this.WRITENO = writeno;
-
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -53,7 +55,7 @@ public class HTTPconnBoardDelete extends AsyncTask<Void,Void,Void>{
                 + "&" +http_writeno +"="+WRITENO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

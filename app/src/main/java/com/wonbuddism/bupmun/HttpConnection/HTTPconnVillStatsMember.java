@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.VillageStatsMember;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Vil.VillageStatsRecyclerViewAdapter;
 
 import org.json.JSONArray;
@@ -25,7 +26,7 @@ public class HTTPconnVillStatsMember extends AsyncTask<Void,Void,Void>{
 
     private Activity activity;
     private String TAG = "HTTPconnVillStatsMember";
-    private String http_conection_url = "http://115.91.201.9/vilage/statistics/member";
+    private String http_conection_url = "vilage/statistics/member";
     private String http_otp ="otp";
     private String http_vil_id ="vil_id";
     private String http_page_no = "page_no";
@@ -33,6 +34,7 @@ public class HTTPconnVillStatsMember extends AsyncTask<Void,Void,Void>{
     private String OTP;
     private String VIL_ID;
     private String PAGE_NO;
+    private String http_host;
     private VillageStatsRecyclerViewAdapter adapter;
 
     public HTTPconnVillStatsMember(Activity activity, VillageStatsRecyclerViewAdapter adapter, String vil_id, String page_no) {
@@ -41,7 +43,7 @@ public class HTTPconnVillStatsMember extends AsyncTask<Void,Void,Void>{
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.VIL_ID = vil_id;
         this.PAGE_NO = page_no;
-
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -56,7 +58,7 @@ public class HTTPconnVillStatsMember extends AsyncTask<Void,Void,Void>{
         String postData =  http_otp +"="+OTP +"&"+http_vil_id +"="+VIL_ID +"&"+http_page_no +"="+PAGE_NO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);
@@ -180,9 +182,9 @@ public class HTTPconnVillStatsMember extends AsyncTask<Void,Void,Void>{
             USERID = jInfo.getString("USERID");
             NAME = jInfo.getString("NAME");
 
-            TODAY_CNT = jInfo.optString("VIL_CNT","0");
-            MONTH_CNT = jInfo.optString("MONTH_CNT","0");
-            TOTAL_CNT = jInfo.optString("TOTAL_CNT","0");
+            TODAY_CNT = String.valueOf(jInfo.optInt("VIL_CNT", 0));
+            MONTH_CNT = String.valueOf(jInfo.optInt("MONTH_CNT", 0));
+            TOTAL_CNT = String.valueOf(jInfo.optInt("TOTAL_CNT", 0));
         }catch (JSONException e){
             e.printStackTrace();
         }

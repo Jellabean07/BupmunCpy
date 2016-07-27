@@ -13,6 +13,7 @@ import com.wonbuddism.bupmun.Listener.ProgressReponseListener;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 import com.wonbuddism.bupmun.DataVo.HttpResultBupmun;
+import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Writing.WritingMainActivity;
 
 import org.json.JSONArray;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 public class HttpConnProgressTitle extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
-    private String http_conection_url = "http://115.91.201.9/meditation/titlelist";
+    private String http_conection_url = "meditation/titlelist";
     private String http_login_otp = "otp";
     private String http_index = "index" ;
     private String http_title_no = "title_no";
@@ -41,6 +42,7 @@ public class HttpConnProgressTitle extends AsyncTask<Void,Void,Void> {
     private String responseResult;
     private String OTP;
     private String TAG = "HttpConnProgressTitle";
+    private String http_host;
 
     private HttpParamProgress httpParam;
     private ProgressWaitDaialog daialog;
@@ -52,6 +54,7 @@ public class HttpConnProgressTitle extends AsyncTask<Void,Void,Void> {
         this.httpParam = httpParam;
         Log.e("OTP", this.OTP);
         this.daialog = new ProgressWaitDaialog(this.activity);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -79,7 +82,7 @@ public class HttpConnProgressTitle extends AsyncTask<Void,Void,Void> {
         Log.e(TAG, postData);
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

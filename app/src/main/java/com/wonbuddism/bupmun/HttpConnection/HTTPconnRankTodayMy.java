@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.RankMyInfo;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,16 +20,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
     private Activity activity;
-    private String TAG = "HTTPconnectionRank";
-    private String http_conection_url = "http://115.91.201.9/rank/today";
+    private String TAG = "HTTPconnRankTodayMy";
+    private String http_conection_url = "rank/today";
     private String http_otp ="otp";
     private String http_page_no ="page_no";
     private String responseResult;
     private String OTP;
     private String PAGE_NO;
+    private String http_host;
     private TextView msg;
 
 
@@ -37,6 +41,7 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.PAGE_NO = "0";
         this.msg = msg;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -51,7 +56,7 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
         String postData =  http_otp +"="+OTP +"&"+http_page_no+"="+PAGE_NO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);
@@ -92,14 +97,14 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         String responseCode = "";
-        JSONObject resultData1 = null;
-        RankMyInfo rankMyInfo;
+        JSONArray resultData1 = null;
+        RankMyInfo rankMyInfo = null;
 
         if (responseResult != null) {
             try {
                 JSONObject jObj = new JSONObject(responseResult);
                 responseCode = jObj.getString("code");
-                resultData1 = jObj.getJSONObject("resultData1");
+                resultData1 = jObj.getJSONArray("resultData1");
 
             } catch (JSONException e) {
                 Log.e(TAG, "JSON error :: " + e);
@@ -114,7 +119,11 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
 
         } else if (responseCode.contains("00")) {
             //  00 : 정상
-            rankMyInfo = getRankMyInfo(resultData1);
+
+            for(RankMyInfo s : getList(resultData1)){
+                rankMyInfo = s;
+            }
+
             msg.setText(rankMyInfo.getName()+"님의 전체 랭킹은 전체"+rankMyInfo.getToday_rank()+"명 중에 "+rankMyInfo.getToday_total_cnt()+"위 입니다.");
 
         } else if (responseCode.contains("01")) {
@@ -137,8 +146,30 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
         }
 
     }
+    private ArrayList<RankMyInfo> getList(JSONArray jList){
+        int count = 0;
+        if(jList !=null){
+            count = jList.length();
+        }
 
-    private RankMyInfo getRankMyInfo(JSONObject jInfo){
+        ArrayList<RankMyInfo> list = new ArrayList<RankMyInfo>();
+        RankMyInfo info = null;
+
+        /** Taking each country, parses and adds to list object */
+        for(int i=0; i<count;i++){
+            try {
+                /** Call getCountry with country JSON object to parse the country */
+                info = getObject((JSONObject) jList.get(i));
+                list.add(info);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
+    private RankMyInfo getObject(JSONObject jInfo){
         String name = new PrefUserInfoManager(activity).getUserInfo().getNAME();
         String today_rank = "0";
         String today_total_cnt = "0";
@@ -146,8 +177,8 @@ public class HTTPconnRankTodayMy extends AsyncTask<Void,Void,Void> {
         if(jInfo !=null) {
             try {
                 name = jInfo.getString("NAME");
-                today_rank = jInfo.getString("TODAY_RANK");
-                today_total_cnt = jInfo.getString("TODAY_TOTAL_CNT");
+                today_rank = jInfo.getString("RN");
+                today_total_cnt = jInfo.getString("TODYAY_TOTAL_CNT");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

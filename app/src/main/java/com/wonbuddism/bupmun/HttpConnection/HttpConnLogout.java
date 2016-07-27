@@ -11,6 +11,7 @@ import com.wonbuddism.bupmun.Login.LoginMainActivity;
 import com.wonbuddism.bupmun.DataVo.PrefUserInfo;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,10 +26,11 @@ import java.net.URL;
 public class HttpConnLogout extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
-    private String http_conection_url = "http://115.91.201.9/logout";
+    private String http_conection_url = "logout";
     private String http_login_otp="otp";
     private String responseResult;
     private String OTP;
+    private String http_host;
     private Dialog dialog;
 
     public HttpConnLogout(Activity activity) {
@@ -36,6 +38,7 @@ public class HttpConnLogout extends AsyncTask<Void,Void,Void> {
         this.dialog  = new ProgressWaitDaialog(activity);
         this.dialog.show();
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -50,7 +53,7 @@ public class HttpConnLogout extends AsyncTask<Void,Void,Void> {
         String postData =  http_login_otp+"="+OTP;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

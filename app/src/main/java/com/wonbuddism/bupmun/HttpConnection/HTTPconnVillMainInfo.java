@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.DataVo.VillageMainInfo;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.VillageJoinListDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,18 +27,20 @@ import java.util.ArrayList;
 public class HTTPconnVillMainInfo extends AsyncTask<Void,Void,Void>{
 
     private Activity activity;
-    private String http_conection_url = "http://115.91.201.9/vilage";
+    private String http_conection_url = "vilage";
     private String http_login_otp="otp";
     private String responseResult;
     private String OTP;
     private String TAG = "HTTPconnVillMainInfo";
     private Dialog dialog;
+    private String http_host;
 
     public HTTPconnVillMainInfo(Activity activity, Dialog dialog) {
         this.activity = activity;
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.dialog = dialog;
         Log.e("OTP",this.OTP);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -52,7 +55,7 @@ public class HTTPconnVillMainInfo extends AsyncTask<Void,Void,Void>{
         String postData =  http_login_otp+"="+OTP;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

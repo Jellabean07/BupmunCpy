@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.Board.BoardArticleListViewAdapter;
 import com.wonbuddism.bupmun.DataVo.BoardArticle;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 public class HTTPconnBoardSearch extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HTTPconnBoardMainAll";
-    private String http_conection_url = "http://115.91.201.9/board/search";
+    private String http_conection_url = "board/search";
     private String http_otp ="otp";
     private String http_boardno = "boardno";
     private String http_keyword = "keyword";
@@ -40,6 +41,7 @@ public class HTTPconnBoardSearch extends AsyncTask<Void,Void,Void>{
     private String CATEGORY;
     private BoardArticleListViewAdapter adapter;
     private TextView total;
+    private String http_host;
 
     /*00 : 제목
     01 : 내용
@@ -57,6 +59,7 @@ public class HTTPconnBoardSearch extends AsyncTask<Void,Void,Void>{
         this.CATEGORY = category;
         this.PAGE_NO = page_no;
         this.adapter.addFooter();
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -74,7 +77,7 @@ public class HTTPconnBoardSearch extends AsyncTask<Void,Void,Void>{
 
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ public class HTTPconnBoardRegist extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
     private String TAG = "HTTPconnBoardRegist";
-    private String http_conection_url = "http://115.91.201.9/board/file/up";
+    private String http_conection_url = "board/file/up";
     private String http_otp ="otp";
     private String http_boardno ="boardno";
   //  private String http_parentwriteno ="parentwriteno";
@@ -34,6 +35,7 @@ public class HTTPconnBoardRegist extends AsyncTask<Void,Void,Void> {
  //   private String PARENTWRITENO;
     private String TITLE;
     private String CONTENT;
+    private String http_host;
 
 
     public HTTPconnBoardRegist(Activity activity,String boardno, String title, String content) {
@@ -43,6 +45,7 @@ public class HTTPconnBoardRegist extends AsyncTask<Void,Void,Void> {
         this.TITLE = title;
         this.CONTENT = content;
         Log.e("CONTENT",CONTENT);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -58,7 +61,7 @@ public class HTTPconnBoardRegist extends AsyncTask<Void,Void,Void> {
                     + "&" +http_title +"="+TITLE + "&" + http_content +"="+CONTENT;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

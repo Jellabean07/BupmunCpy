@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ import java.net.URL;
 public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HTTPconnWritingReport";
-    private String http_conection_url = "http://115.91.201.9/meditation/report";
+    private String http_conection_url = "meditation/report";
     private String http_otp ="otp";
     private String http_index = "index";
     private String http_category = "category";
@@ -32,6 +33,7 @@ public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
     private String INDEX;
     private String CATEGORY;
     private String CONTENT;
+    private String http_host;
 
     private ProgressWaitDaialog daialog;
 
@@ -42,6 +44,7 @@ public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
         this.CATEGORY = category;
         this.CONTENT = content;
         this.daialog = new ProgressWaitDaialog(this.activity);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -58,7 +61,7 @@ public class HTTPconnWritingReport extends AsyncTask<Void,Void,Void>{
                 + "&"+ http_index +"="+ INDEX + "&"+ http_content +"="+ CONTENT;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

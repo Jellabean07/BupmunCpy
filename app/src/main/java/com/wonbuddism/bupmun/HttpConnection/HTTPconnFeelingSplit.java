@@ -8,7 +8,8 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.FeelingMemo;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
-import com.wonbuddism.bupmun.Writing.WritingFeelingDialogAdapter;
+import com.wonbuddism.bupmun.Dialog.WritingFeelingDialogAdapter;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class HTTPconnFeelingSplit extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HTTPconnFeelingSplit";
-    private String http_conection_url = "http://115.91.201.9/memo/detail";
+    private String http_conection_url = "memo/detail";
     private String http_otp ="otp";
     private String http_index = "index";
     private String http_page_no = "page_no";
@@ -33,6 +34,7 @@ public class HTTPconnFeelingSplit extends AsyncTask<Void,Void,Void>{
     private String OTP;
     private String INDEX;
     private String PAGE_NO;
+    private String http_host;
     private WritingFeelingDialogAdapter adapter;
 
 
@@ -42,6 +44,7 @@ public class HTTPconnFeelingSplit extends AsyncTask<Void,Void,Void>{
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.INDEX = index;
         this.PAGE_NO = page_no;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -57,7 +60,7 @@ public class HTTPconnFeelingSplit extends AsyncTask<Void,Void,Void>{
                 + "&" + http_page_no+"="+PAGE_NO ;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

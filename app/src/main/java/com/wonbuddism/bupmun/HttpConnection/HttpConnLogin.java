@@ -13,6 +13,7 @@ import com.wonbuddism.bupmun.Main.MainActivity;
 import com.wonbuddism.bupmun.DataVo.PrefUserInfo;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +28,7 @@ import java.net.URL;
 public class HttpConnLogin extends AsyncTask<Void,Void,Void>{
     private Activity activity;
     private String TAG = "HttpConnLogin";
-    private String http_conection_url = "http://115.91.201.9/login";
+    private String http_conection_url = "login";
     private String http_login_userid="userid";
     private String http_login_pass="userpass";
     private String http_version="VERSION";
@@ -39,6 +40,7 @@ public class HttpConnLogin extends AsyncTask<Void,Void,Void>{
     private String version;
     private String model;
     private String OS;
+    private String http_host;
     private Dialog dialog;
 
 
@@ -52,6 +54,7 @@ public class HttpConnLogin extends AsyncTask<Void,Void,Void>{
         this.version = Build.VERSION.RELEASE;
         this.OS = "Android";
         this.model = Build.MODEL;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -67,7 +70,7 @@ public class HttpConnLogin extends AsyncTask<Void,Void,Void>{
                 +"&"+ http_version+"="+version+"&"+ http_model+"="+model +"&"+ http_os+"="+OS;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

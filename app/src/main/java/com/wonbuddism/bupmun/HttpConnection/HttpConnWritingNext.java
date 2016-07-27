@@ -10,6 +10,7 @@ import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.DataVo.HttpResultBupmun;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 import com.wonbuddism.bupmun.Listener.HttpConnWritingListener;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +31,7 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
     private String TAG = "HttpConnWritingNext";
-    private String http_conection_url = "http://115.91.201.9/meditation/next";
+    private String http_conection_url = "meditation/next";
     private String http_login_otp = "otp";
     private String http_index = "index";
     private String http_sort = "sort";
@@ -38,6 +39,7 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
     private String OTP;
     private String index;
     private String sort;
+    private String http_host;
     private ProgressWaitDaialog daialog;
     private HttpConnWritingListener listener;
 
@@ -48,6 +50,7 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
         this.sort = sort;
         Log.e("OTP", this.OTP);
         this.daialog = new ProgressWaitDaialog(this.activity);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -65,7 +68,7 @@ public class HttpConnWritingNext extends AsyncTask<Void,Void,Void> {
                 + "&" + http_sort + "=" + sort;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

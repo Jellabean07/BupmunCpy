@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.wonbuddism.bupmun.DataVo.VillageComments;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 import com.wonbuddism.bupmun.Vil.VillageRecycleViewAdapter;
 
 import org.json.JSONArray;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class HTTPconnVillComment extends AsyncTask<Void,Void,Void> {
     private Activity activity;
     private String TAG = "HTTPconnVillComment";
-    private String http_conection_url = "http://115.91.201.9/comment";
+    private String http_conection_url = "comment";
     private String http_otp ="otp";
     private String http_vil_id = "vil_id";
     private String http_page_no = "page_no";
@@ -33,6 +34,7 @@ public class HTTPconnVillComment extends AsyncTask<Void,Void,Void> {
     private String OTP;
     private String VIL_ID;
     private String PAGE_NO;
+    private String http_host;
     private VillageRecycleViewAdapter adapter;
     private ArrayList<VillageComments> villageCommentses;
 
@@ -43,6 +45,7 @@ public class HTTPconnVillComment extends AsyncTask<Void,Void,Void> {
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.VIL_ID = vil_id;
         this.PAGE_NO = page_no;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -58,7 +61,7 @@ public class HTTPconnVillComment extends AsyncTask<Void,Void,Void> {
 
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

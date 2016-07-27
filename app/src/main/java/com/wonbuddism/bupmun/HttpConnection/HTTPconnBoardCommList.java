@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.Board.BoardCommentRecyclerViewAdapter;
 import com.wonbuddism.bupmun.DataVo.BoardComment;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,9 +25,10 @@ import java.util.ArrayList;
 
 
 public class HTTPconnBoardCommList extends AsyncTask<Void,Void,Void> {
+    private String http_host;
     private Activity activity;
     private String TAG = "HTTPconnBoardMainAll";
-    private String http_conection_url = "http://115.91.201.9/board/comment";
+    private String http_conection_url = "board/comment";
     private String http_otp ="otp";
     private String http_boardno = "boardno";
     private String http_writeno = "writeno";
@@ -48,6 +50,7 @@ public class HTTPconnBoardCommList extends AsyncTask<Void,Void,Void> {
         this.BOARDNO = boardno;
         this.WRITENO = writeno;
         this.PAGE_NO = page_no;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -63,7 +66,7 @@ public class HTTPconnBoardCommList extends AsyncTask<Void,Void,Void> {
                 +  "&" + http_writeno +"="+WRITENO+  "&" + http_page_no +"="+PAGE_NO;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

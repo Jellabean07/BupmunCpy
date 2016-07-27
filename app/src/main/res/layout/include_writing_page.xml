@@ -54,7 +54,7 @@
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:src="@drawable/write_btn_replay"
-                            android:id="@+id/writing_imageview_stop"
+                            android:id="@+id/writing_imageview_replay"
                             android:layout_marginLeft="8dp" />
                     </LinearLayout>
                     <LinearLayout
@@ -195,6 +195,7 @@
             android:layout_height="59dp"
             android:orientation="horizontal"
             android:background="#dcdcdc"
+            android:visibility="gone"
             android:id="@+id/writing_lower">
             <FrameLayout
                 android:layout_width="match_parent"

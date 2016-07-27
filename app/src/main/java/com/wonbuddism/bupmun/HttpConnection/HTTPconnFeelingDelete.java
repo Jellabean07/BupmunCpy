@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ public class HTTPconnFeelingDelete extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
     private String TAG = "HTTPconnFeelingDelete";
-    private String http_conection_url = "http://115.91.201.9/memo/remove";
+    private String http_conection_url = "memo/remove";
     private String http_otp ="otp";
     private String http_index = "index";
     private String http_memo_seq = "memo_seq";
@@ -30,6 +31,7 @@ public class HTTPconnFeelingDelete extends AsyncTask<Void,Void,Void> {
     private String OTP;
     private String INDEX;
     private String MEMO_SEQ;
+    private String http_host;
 
 
     public HTTPconnFeelingDelete(Activity activity,String index, String memo_seq) {
@@ -37,6 +39,7 @@ public class HTTPconnFeelingDelete extends AsyncTask<Void,Void,Void> {
         this.OTP= new PrefUserInfoManager(this.activity).getOTP();
         this.INDEX = index;
         this.MEMO_SEQ = memo_seq;
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -52,7 +55,7 @@ public class HTTPconnFeelingDelete extends AsyncTask<Void,Void,Void> {
                 + "&"+http_memo_seq+"="+MEMO_SEQ;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

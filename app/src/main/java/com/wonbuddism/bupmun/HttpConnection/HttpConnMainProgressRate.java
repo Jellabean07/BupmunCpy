@@ -9,6 +9,7 @@ import com.wonbuddism.bupmun.DataVo.HttpResultProgressRate;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
 import com.wonbuddism.bupmun.Listener.MainProgressRateListener;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +29,12 @@ import java.util.ArrayList;
 public class HttpConnMainProgressRate extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
-    private String http_conection_url = "http://115.91.201.9/meditation/exp";
+    private String http_conection_url = "meditation/exp";
     private String http_login_otp = "otp";
     private String responseResult;
     private String OTP;
     private String TAG = "HttpConnMainProgressRate";
+    private String http_host;
 
     private MainProgressRateListener listener;
     private ProgressWaitDaialog daialog;
@@ -42,6 +44,7 @@ public class HttpConnMainProgressRate extends AsyncTask<Void,Void,Void> {
         this.OTP = new PrefUserInfoManager(this.activity).getOTP();
         Log.e("OTP", this.OTP);
         this.daialog = new ProgressWaitDaialog(this.activity);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -57,7 +60,7 @@ public class HttpConnMainProgressRate extends AsyncTask<Void,Void,Void> {
         String postData = http_login_otp + "=" + OTP;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

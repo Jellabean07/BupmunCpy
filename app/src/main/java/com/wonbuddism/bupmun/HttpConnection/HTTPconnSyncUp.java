@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.wonbuddism.bupmun.DataVo.HttpParamBupmun;
 import com.wonbuddism.bupmun.Common.PrefUserInfoManager;
 import com.wonbuddism.bupmun.Dialog.ProgressWaitDaialog;
+import com.wonbuddism.bupmun.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ import java.net.URL;
 public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
     private Activity activity;
     private String TAG = "HTTPconnSyncUp";
-    private String http_conection_url = "http://115.91.201.9/sync/select";
+    private String http_conection_url = "sync/select";
     private String http_otp ="otp";
     private String http_paragraph_no = "paragraph_no";
     private String http_tasu = "tasu";
@@ -32,6 +33,7 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
     private String PARAGRAPH_NO;
     private String TASU;
     private String INDEX;
+    private String http_host;
     private ProgressWaitDaialog daialog;
    /* paragraph_no (varchar)
     tasu (varchar)
@@ -45,6 +47,7 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
         this.TASU = String.valueOf(hpb.getTASU());
         this.INDEX = hpb.getBupmunindex();
         this.daialog = new ProgressWaitDaialog(this.activity);
+        this.http_host = this.activity.getResources().getString(R.string.host_name);
     }
 
 
@@ -61,7 +64,7 @@ public class HTTPconnSyncUp extends AsyncTask<Void,Void,Void> {
                 +"&"+http_tasu +"="+TASU +"&"+http_index +"="+INDEX;
 
         try {
-            URL url = new URL(http_conection_url);
+            URL url = new URL(http_host+http_conection_url);
             HttpURLConnection httpURLconn = (HttpURLConnection) url.openConnection();
             httpURLconn.setRequestMethod("POST");
             httpURLconn.setUseCaches(false);

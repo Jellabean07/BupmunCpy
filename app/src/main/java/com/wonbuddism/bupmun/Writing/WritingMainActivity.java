@@ -17,11 +17,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wonbuddism.bupmun.Dialog.WritingErrorDialog;
+import com.wonbuddism.bupmun.Dialog.WritingFeelingDialog;
 import com.wonbuddism.bupmun.Dialog.WritingSCDialog;
 import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingNext;
 import com.wonbuddism.bupmun.HttpConnection.HttpConnWritingPrevious;
@@ -53,12 +55,15 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     @Bind(R.id.writing_content_list_listview) ListView typingList;
     @Bind(R.id.writing_nav_view) NavigationView navigationView;
     @Bind(R.id.writing_toolbar) Toolbar toolbar;
+    @Bind(R.id.writing_imageview_play) ImageView play;
+    @Bind(R.id.writing_imageview_replay) ImageView replay;
+    @Bind(R.id.writing_lower) LinearLayout typingframe;
 
+    private String TAG = "WritingMainActivity";
     private InputMethodManager imm;
     private TypingSupport typingSupport;
     private TextSplitManager splitManager;
-
-    private String TAG = "WritingMainActivity";
+    private WritingMediaPlay mediaPlay;
 
     private ArrayList<String> content;
     private ArrayList<String> words;
@@ -68,6 +73,8 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
 
     private int direction = 1; //1 오른쪽 -1 왼쪽
     private boolean flag = true;
+    private boolean mMediaPlayState = false;
+
 
 
 
@@ -75,6 +82,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing_main);
+        mediaPlay = new WritingMediaPlay(this);
         setLayout();
         setBupmun();
 
@@ -86,11 +94,14 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         nextbtn.setOnClickListener(this);
         beforebtn.setOnClickListener(this);
         scbtn.setOnClickListener(this);
+        play.setOnClickListener(this);
+        replay.setOnClickListener(this);
 
         typingSupport = new TypingSupport(this, textLine,typingLine, typingList);
         typingSupport.setOnFinishListener(this);
 
         imm = (InputMethodManager)getSystemService(WritingMainActivity.this.INPUT_METHOD_SERVICE); //키보드 컨트롤
+
 
         if (navigationView != null) {
             new NavigationDrawerMenu(this,mDrawerLayout).setupDrawerContent(navigationView);
@@ -126,6 +137,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
 
 
     public void DataImport(){
+        Log.e(TAG,content.size()+"");
         paragraph = hrb.getPARAGRAPH_NO();
         Log.e(TAG, "paragraph : " + paragraph);
         for(int i=0; i<paragraph;i++){
@@ -147,7 +159,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
 
         HttpParamBupmun hpb = new HttpParamBupmun(paragraph_no,bupmunindex,tasu);
         new HTTPconnSyncUp(this,hpb).execute();
-        Log.e(TAG, "UpLoad : 사경시도");
+        Log.e(TAG, "UpLoad : "+paragraph_no);
     }
 
     public void NextParagraph(){
@@ -155,11 +167,37 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         typingSupport.setReplaceContent(words);
     }
 
+    private void completeBupmun() {
+        paragraph = 0;
+        content = new ArrayList<>();
+
+        //content.add(hrb.getSHORTTITLE());
+        for(String s : hrb.getCONTENTS_KOR().split("\r")){
+            content.add(s.trim());
+        }
+
+        typingSupport.AdapterClearDataSetChanged();
+
+        DataImport();
+
+       /* if(paragraph<content.size()){
+            words = splitManager.TextSplit(content.get(paragraph));
+            Log.e("다음문장 스플릿","스플릿");
+        }else{
+            words = new ArrayList<>();
+            words.add("\r");
+            Log.e("다음문장 노스플릿", "노스플릿");
+        }
+
+        typingSupport.setReplaceContent(words, true);*/
+    }
+
+
     private void MoveBupmun() {
         paragraph = 0;
         content = new ArrayList<>();
 
-        content.add(hrb.getSHORTTITLE());
+        //content.add(hrb.getSHORTTITLE());
         for(String s : hrb.getCONTENTS_KOR().split("\r")){
             content.add(s.trim());
         }
@@ -181,13 +219,13 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    public void DataProcess(){
+    public void initBupmun(){
         paragraph = 0;
         words = new ArrayList<>();
         content = new ArrayList<>();
         splitManager=new TextSplitManager(this, textLine);
 
-        content.add(hrb.getSHORTTITLE());
+        //content.add(hrb.getSHORTTITLE());
         for(String s : hrb.getCONTENTS_KOR().split("\r")){
             content.add(s.trim());
         }
@@ -206,6 +244,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
 
         typingSupport.Warcher(words);
     }
+
     private void NextBupmun(){
         HttpConnWritingNext hcwn = new HttpConnWritingNext(this,hrb.getBUPMUNINDEX(),hrb.getBUPMUNSORT());
         hcwn.setOnListener(this);
@@ -283,6 +322,18 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
                 dialog.setOnDismissListener(this);
                 dialog.show();
                 break;
+            case R.id.writing_imageview_replay:
+                mediaPlay.RePlayAudio();
+                play.setImageResource(R.drawable.write_btn_stop);
+                break;
+            case R.id.writing_imageview_play:
+                if(mediaPlay.isPalyingAudio()){
+                    play.setImageResource(R.drawable.write_btn_play);
+                }else{
+                    play.setImageResource(R.drawable.write_btn_stop);
+                }
+                mediaPlay.PlayPauseAudio();
+                break;
         }
     }
 
@@ -295,16 +346,14 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
         if(words.get(0).equals("\r")){
             switch (direction){
                 case 1:
-                    NextBupmun();
-                    Log.e(TAG, "NextBupmun");
+                    //NextBupmun();
+                    Log.e(TAG, "NextBupmun -> 아이고");
                     break;
                 case -1:
-                    PreviousBupmun();
-                    Log.e(TAG, "PreviousBupmun");
+                    //PreviousBupmun();
+                    Log.e(TAG, "PreviousBupmun -> 야가어디고");
                     break;
             }
-
-            Toast.makeText(WritingMainActivity.this,"다음 법문",Toast.LENGTH_SHORT).show();
         }else{
             UpLoad();
             paragraph = paragraph + 1;
@@ -312,7 +361,7 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
                 NextParagraph();
             }else{
                 NextBupmun();
-                Toast.makeText(WritingMainActivity.this,"다음 법문",Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "NextBupmun -> 여긴어디고");
             }
         }
     }
@@ -322,6 +371,13 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void WritingListener(HttpResultBupmun hrb) {
         this.hrb = hrb;
+        //this.mediaPlay.ReleaseMedia();
+        if(mMediaPlayState){
+            mediaPlay.ReleaseMedia();
+        }
+        mMediaPlayState = true;
+        this.mediaPlay.SetupMedia(hrb.getBUPMUNINDEX());
+
         setResultBupmun();
 
     }
@@ -332,12 +388,26 @@ public class WritingMainActivity extends AppCompatActivity implements View.OnCli
                 hrb.getTITLE3() + " " + hrb.getTITLE4());
         textLine.setText(hrb.getSHORTTITLE());
 
+
         if(flag){
-            DataProcess();
+            initBupmun();
             flag = false;
         }else{
             MoveBupmun();
         }
+
+        if(hrb.getPARAGRAPH_CNT()<=hrb.getPARAGRAPH_NO()){
+           // completeBupmun();
+            typingframe.setVisibility(View.GONE);
+            imm.hideSoftInputFromWindow(typingLine.getWindowToken(), 0);
+            textLine.setText(hrb.getSHORTTITLE());
+
+        }else{
+            typingframe.setVisibility(View.VISIBLE);
+        }
+
+
+
     }
 
     @Override
